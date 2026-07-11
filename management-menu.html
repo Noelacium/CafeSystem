@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý thực đơn - The Coffee House</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+       body { font-family: 'Quicksand', sans-serif; }
+
+        #sidebar.collapsed {
+            width: 5rem !important;
+        }
+        #sidebar.collapsed .sidebar-text {
+            display: none !important;
+        }
+        #sidebar.collapsed a {
+            justify-content: center !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        #sidebar.collapsed a i, 
+        #sidebar.collapsed a svg {
+            margin-right: 0 !important;
+        }
+        #sidebar.collapsed .logo-container {
+            justify-content: center !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        #sidebar.collapsed .logo-container i,
+        #sidebar.collapsed .logo-container svg {
+            margin-right: 0 !important;
+        }
+        .dropdown-menu {
+            display: none;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-[#fff2da] min-h-screen flex text-[#3d1f16]">
+
+<aside id="sidebar" class="w-64 bg-[#dcc5b4] flex flex-col flex-shrink-0 border-r border-[#542e23]/10 shadow-md transition-all duration-300 overflow-x-hidden">
+    <div class="logo-container h-16 flex items-center px-6 border-b border-[#542e23]/10 bg-[#542e23] text-white whitespace-nowrap">
+        <i data-lucide="coffee" class="w-6 h-6 mr-3 text-[#fff2da] flex-shrink-0"></i>
+        <span class="sidebar-text font-bold tracking-wide text-sm uppercase">The Coffee House</span>
+    </div>
+    
+    <nav class="flex-1 p-4 space-y-6 overflow-y-auto whitespace-nowrap">
+        <div>
+            <div class="space-y-1">
+                <a href="ui-main.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Màn hình chính</span>
+                </a>
+                <a href="ui-order.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Ghi Order</span>
+                </a>
+                <a href="ui-payment.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="wallet" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Thu ngân</span>
+                </a>
+                <a href="ui-kitchen.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="chef-hat" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Nhà bếp</span>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <p class="sidebar-text px-3 text-[11px] font-bold uppercase tracking-wider text-[#542e23]/60 mb-2">Quản lý hệ thống</p>
+            <div class="space-y-1">
+                <a href="management-menu.html" class="flex items-center px-3 py-2.5 bg-[#542e23] text-white font-semibold rounded-lg text-sm shadow-sm">
+                    <i data-lucide="utensils-crossed" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý thực đơn</span>
+                </a>
+                <a href="management-inventory.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="boxes" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý kho</span>
+                </a>
+                <a href="management-employee.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="users-round" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý nhân viên</span>
+                </a>
+                <a href="management-promo.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="ticket-percent" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Chương trình ưu đãi</span>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <p class="sidebar-text px-3 text-[11px] font-bold uppercase tracking-wider text-[#542e23]/60 mb-2">Thống kê</p>
+            <div class="space-y-1">
+                <a href="report-revenue.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Báo cáo doanh thu</span>
+                </a>
+                <a href="report-sales.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="line-chart" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Báo cáo bán hàng</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[#fff2da]">
+        
+        <header class="h-16 bg-[#dcc5b4]/40 border-b border-[#542e23]/10 flex items-center justify-between px-6">
+            <div class="flex items-center space-x-2">
+                <button id="toggle-sidebar" class="p-1.5 rounded hover:bg-[#542e23]/5 cursor-pointer">
+                    <i data-lucide="menu" class="w-5 h-5 text-[#542e23]"></i>
+                </button>
+                <h2 class="text-base font-bold text-[#542e23]">Quản lý thực đơn</h2>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="text-sm font-medium text-[#542e23] flex items-center space-x-2">
+                    <span id="current-user-display">Đang tải...</span>
+                </div>
+                <div class="relative">
+                    <button id="user-menu-btn" class="text-[#542e23] hover:text-red-600 transition-colors p-2 rounded-full hover:bg-[#542e23]/5 cursor-pointer">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                    </button>
+                    
+                    <div id="user-dropdown" class="dropdown-menu absolute right-0 mt-2 w-48 bg-white border border-[#542e23]/15 rounded-xl shadow-lg py-1 z-50">
+                        <button id="logout-btn" class="w-full text-left px-4 py-2.5 text-xs font-bold text-red-600 hover:bg-red-50 flex items-center gap-2 cursor-pointer transition-colors">
+                            <i data-lucide="log-out" class="w-4 h-4"></i> ĐĂNG XUẤT
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-4 flex justify-between items-center bg-[#fff2da] flex-shrink-0">
+            <div class="flex gap-2">
+                <button id="open-add-modal-btn" class="px-5 py-2 bg-[#e28766] hover:bg-[#d07353] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide cursor-pointer">
+                    <i data-lucide="plus-circle" class="w-4 h-4"></i> Thêm món mới
+                </button>
+                <button id="open-edit-modal-btn" class="px-5 py-2 bg-white border border-[#542e23]/20 hover:bg-[#542e23]/5 text-[#542e23] text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide cursor-pointer">
+                    <i data-lucide="edit-3" class="w-4 h-4"></i> Sửa món
+                </button>
+                <button id="delete-product-btn" class="px-5 py-2 bg-[#ef4444] hover:bg-[#dc2626] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide cursor-pointer">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i> Xóa món
+                </button>
+            </div>
+            <div class="relative w-64">
+                <input type="text" id="search-input" oninput="renderMenuTable()" placeholder="Tìm kiếm tên món, mã món..." class="w-full bg-white pl-9 pr-4 py-2 rounded-lg border border-[#542e23]/10 text-xs focus:outline-none focus:border-[#e28766] font-medium">
+                <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-2.5"></i>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-auto px-4 pb-4">
+            <div class="bg-white rounded-xl shadow-sm border border-[#542e23]/10 overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-[#542e23] text-white text-xs font-bold uppercase tracking-wider">
+                            <th class="p-4 pl-5 border-b border-[#542e23]/10 w-12 text-center">Chọn</th>
+                            <th class="p-4 border-b border-[#542e23]/10">Loại món</th>
+                            <th class="p-4 border-b border-[#542e23]/10 text-center">Mã món</th>
+                            <th class="p-4 border-b border-[#542e23]/10">Tên món</th>
+                            <th class="p-4 border-b border-[#542e23]/10">Nhóm thực đơn</th>
+                            <th class="p-4 border-b border-[#542e23]/10 text-center">Đơn vị tính</th>
+                            <th class="p-4 pr-5 border-b border-[#542e23]/10 text-right">Giá bán</th>
+                        </tr>
+                    </thead>
+                    <tbody id="menu-table-body" class="divide-y divide-gray-100 text-xs font-semibold text-[#542e23]">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer class="h-14 bg-[#dcc5b4]/40 border-t border-[#542e23]/10 flex items-center justify-between px-6 flex-shrink-0 text-xs font-bold text-[#542e23]">
+            <div id="pagination-info" class="text-gray-500">Hiển thị...</div>
+            <div class="flex items-center gap-2">
+                <button class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-gray-400 hover:bg-white transition-all cursor-not-allowed" disabled>
+                    <i data-lucide="chevrons-left" class="w-4 h-4"></i>
+                </button>
+                <button class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-gray-400 hover:bg-white transition-all cursor-not-allowed" disabled>
+                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <span class="px-4 py-1.5 bg-[#542e23] text-white rounded-lg shadow-sm font-bold">Trang 1 / 1</span>
+                <button class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-gray-400 cursor-not-allowed" disabled>
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+                <button class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-gray-400 cursor-not-allowed" disabled>
+                    <i data-lucide="chevrons-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </footer>
+    </main>
+
+    <div id="product-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4 select-none">
+        <div class="bg-white rounded-xl shadow-2xl border-4 border-[#542e23] w-full max-w-5xl overflow-hidden flex flex-col transform transition-transform duration-300 scale-95 max-h-[90vh]">
+            
+            <div class="bg-[#542e23] text-white px-5 py-3 flex justify-between items-center flex-shrink-0">
+                <h3 id="modal-title" class="font-bold text-sm tracking-wide uppercase">Thêm món</h3>
+                <button id="close-modal-top" class="text-white/80 hover:text-white transition-colors cursor-pointer">
+                    <i data-lucide="x-circle" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#fff2da]/10 text-xs font-semibold text-[#542e23]">
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center space-x-6">
+                        <span class="w-24 font-bold text-sm">Loại</span>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="product-type" value="drink" checked class="accent-[#e28766] w-4 h-4">
+                            <span>Đồ uống</span>
+                        </label>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="radio" name="product-type" value="food" class="accent-[#e28766] w-4 h-4">
+                            <span>Món ăn</span>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center">
+                        <span class="w-24 font-bold">Tên món (<span class="text-red-500">*</span>)</span>
+                        <input type="text" id="modal-product-name" placeholder="Nhập tên món ăn/thức uống..." class="flex-1 bg-gray-200/70 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#e28766] focus:bg-white font-medium">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center">
+                            <span class="w-24 font-bold">Mã món (<span class="text-red-500">*</span>)</span>
+                            <input type="text" id="modal-product-code" placeholder="Ví dụ: U06" class="flex-1 bg-gray-200/70 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#e28766] focus:bg-white font-medium">
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-20 text-center font-bold">Giá bán (<span class="text-red-500">*</span>)</span>
+                            <input type="text" id="modal-product-price" placeholder="Giá bán VND..." class="flex-1 bg-gray-200/70 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-[#e28766] focus:bg-white font-medium text-right text-[#a16207]">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center">
+                            <span class="w-24 font-bold">Nhóm thực đơn</span>
+                            <div class="flex-1 flex border border-gray-300 rounded overflow-hidden bg-gray-200/70">
+                                <select id="modal-product-group" class="w-full bg-transparent px-2 py-2 focus:outline-none font-medium cursor-pointer">
+                                    <option value="coffee">Cà phê (coffee)</option>
+                                    <option value="tea">Trà sữa & Trà trái cây (tea)</option>
+                                    <option value="cake">Bánh ngọt & Snack (cake)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-20 text-center font-bold">Đơn vị tính (<span class="text-red-500">*</span>)</span>
+                            <div class="flex-1 flex border border-gray-300 rounded overflow-hidden bg-gray-200/70">
+                                <select id="modal-product-unit" class="w-full bg-transparent px-2 py-2 focus:outline-none font-medium cursor-pointer">
+                                    <option value="Ly">Ly</option>
+                                    <option value="Phần">Phần</option>
+                                    <option value="Cái">Cái</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <span class="w-24 font-bold">Chế biến tại</span>
+                        <div class="w-48 flex border border-gray-300 rounded overflow-hidden bg-gray-200/70">
+                            <select id="modal-product-kitchen" class="w-full bg-transparent px-2 py-2 focus:outline-none font-medium cursor-pointer">
+                                <option value="Quầy bar">Quầy bar</option>
+                                <option value="Nhà bếp">Nhà bếp</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-300 rounded-lg p-3 bg-white space-y-2 shadow-xs">
+                        <div class="text-xs font-bold uppercase tracking-wider text-[#542e23] border-b border-gray-200 pb-1 flex justify-between items-center">
+                            <span>Định lượng nguyên vật liệu (Có thể sửa số lượng)</span>
+                        </div>
+                        <div class="overflow-x-auto max-h-48 overflow-y-auto">
+                            <table class="w-full border-collapse border border-gray-300 text-center">
+                                <thead>
+                                    <tr class="bg-[#dcc5b4]/50 text-[#542e23]">
+                                        <th class="border border-gray-300 p-2 w-1/4">Mã NVL</th>
+                                        <th class="border border-gray-300 p-2 w-1/3 text-left">Nguyên vật liệu</th>
+                                        <th class="border border-gray-300 p-2 w-1/5">Số lượng</th>
+                                        <th class="border border-gray-300 p-2 w-1/5">Đơn vị tính</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-gray-50/50 font-medium">
+                                    <tr>
+                                        <td class="border border-gray-300 p-1.5">NL01</td>
+                                        <td class="border border-gray-300 p-1.5 text-left">Hạt cà phê Arabica</td>
+                                        <td class="border border-gray-300 p-1.5">
+                                            <input type="number" id="ingredient-nl01" value="25" class="w-full bg-amber-50 border border-amber-300 rounded p-1 text-center font-bold text-orange-600 focus:outline-none focus:bg-white">
+                                        </td>
+                                        <td class="border border-gray-300 p-1.5 text-gray-500">gram</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 p-1.5">NL02</td>
+                                        <td class="border border-gray-300 p-1.5 text-left">Sữa tươi thanh trùng</td>
+                                        <td class="border border-gray-300 p-1.5">
+                                            <input type="number" id="ingredient-nl02" value="120" class="w-full bg-amber-50 border border-amber-300 rounded p-1 text-center font-bold text-orange-600 focus:outline-none focus:bg-white">
+                                        </td>
+                                        <td class="border border-gray-300 p-1.5 text-gray-500">mL</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-gray-300 rounded-lg p-4 bg-white flex flex-col items-center justify-between shadow-xs min-h-[320px]">
+                    <span class="w-full text-left font-bold border-b border-gray-100 pb-1">Ảnh đại diện món ăn</span>
+                    <div class="w-full flex-1 flex flex-col items-center justify-center p-2 relative group mt-2">
+                        <div class="w-full h-40 border border-gray-200 rounded overflow-hidden shadow-inner bg-gray-50 flex items-center justify-center">
+                            <img id="image-preview" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="w-full mt-2">
+                        <label class="block text-[10px] font-bold uppercase text-gray-500 mb-1">Dán Link Ảnh Mới Vào Đây:</label>
+                        <input type="text" id="modal-product-image-url" oninput="updateImagePreview(this.value)" placeholder="https://link-anh-cua-ban.com/hinh.jpg" class="w-full text-xs font-medium border border-gray-300 rounded p-2 bg-gray-50 focus:outline-none focus:border-[#e28766] focus:bg-white">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-100 border-t border-gray-200 px-6 py-3 flex justify-end items-center gap-2 flex-shrink-0">
+                <button id="save-modal-btn" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded font-bold flex items-center gap-1.5 cursor-pointer shadow-xs transition-colors">
+                    <i data-lucide="save" class="w-4 h-4"></i> Lưu dữ liệu
+                </button>
+                <button id="close-modal-bottom" class="px-5 py-2 bg-white border border-gray-300 text-gray-700 rounded font-bold flex items-center gap-1.5 hover:bg-gray-50 cursor-pointer shadow-xs transition-colors">
+                    <i data-lucide="minus-square" class="w-4 h-4"></i> Hủy bỏ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const initial27Products = [
+            // CÀ PHÊ (9 món)
+            { id: 1, code: "U01", name: "Cappuccino", price: 65000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?q=80&w=500", nvl1: 25, nvl2: 120 },
+            { id: 2, code: "U02", name: "Espresso", price: 39000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=500", nvl1: 20, nvl2: 0 },
+            { id: 3, code: "U03", name: "Americano", price: 45000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1510972527409-cef1b4579d5d?q=80&w=500", nvl1: 20, nvl2: 0 },
+            { id: 4, code: "U04", name: "Bạc Sỉu Đá", price: 35000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=500", nvl1: 15, nvl2: 150 },
+            { id: 5, code: "U05", name: "Cà Phê Sữa Đá", price: 35000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1553909489-cd47e0907980?q=80&w=500", nvl1: 20, nvl2: 40 },
+            { id: 6, code: "U06", name: "Cafe Latte", price: 65000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=500", nvl1: 20, nvl2: 140 },
+            { id: 7, code: "U07", name: "Caramel Macchiato", price: 69000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1595434035824-2fa74ddd8804?q=80&w=500", nvl1: 20, nvl2: 120 },
+            { id: 8, code: "U08", name: "Mocha Đá", price: 69000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1607687325211-15f97ee59fd7?q=80&w=500", nvl1: 20, nvl2: 100 },
+            { id: 9, code: "U09", name: "Cold Brew Truyền Thống", price: 50000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=500", nvl1: 25, nvl2: 0 },
+            
+            // TRÀ TRÁI CÂY (9 món)
+            { id: 10, code: "U10", name: "Trà Đào Cam Sả", price: 49000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 11, code: "U11", name: "Trà Thạch Đào", price: 49000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 12, code: "U12", name: "Trà Oolong Vải Thạch", price: 45000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://plus.unsplash.com/premium_photo-1687977548737-afa5a6bcb85f?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 13, code: "U13", name: "Trà Long Nhãn Hạt Sen", price: 55000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 14, code: "U14", name: "Trà Sữa Matcha Tây Bắc", price: 59000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?q=80&w=500", nvl1: 0, nvl2: 80 },
+            { id: 15, code: "U15", name: "Trà Xoài Khô Thạch Chanh", price: 55000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 16, code: "U16", name: "Trà Đen Macchiato", price: 45000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=500", nvl1: 0, nvl2: 50 },
+            { id: 17, code: "U17", name: "Hồng Trà Sữa Trân Châu", price: 49000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1541658016709-82535e94bc69?q=80&w=500", nvl1: 0, nvl2: 60 },
+            { id: 18, code: "U18", name: "Trà Hoa Cúc Mật Ong", price: 42000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?q=80&w=500", nvl1: 0, nvl2: 0 },
+
+            // BÁNH NGỌT (9 món)
+            { id: 19, code: "A01", name: "Bánh Tiramisu Choco", price: 45000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 20, code: "A02", name: "Bánh Mousse Ca Cao", price: 35000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 21, code: "A03", name: "Bánh Phô Mai Việt Quất", price: 49000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 22, code: "A04", name: "Bánh Croissant Trứng Muối", price: 39000, category: "cake", type: "food", unit: "Cái", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 23, code: "A05", name: "Bánh Mì Hoa Cúc", price: 45000, category: "cake", type: "food", unit: "Cái", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 24, code: "A06", name: "Macaron Combo 3 Vị", price: 42000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 25, code: "A07", name: "Bánh Su Kem Vanilla", price: 30000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 26, code: "A08", name: "Bánh Red Velvet", price: 49000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 27, code: "A09", name: "Bánh Chocolate Lava", price: 45000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=500", nvl1: 0, nvl2: 0 }
+        ];
+
+        let currentEditId = null;
+
+        function getMenuData() {
+            let data = localStorage.getItem('coffeeHouseMenu');
+            if (!data) {
+                localStorage.setItem('coffeeHouseMenu', JSON.stringify(initial27Products));
+                return initial27Products;
+            }
+            return JSON.parse(data);
+        }
+
+        function saveMenuData(data) {
+            localStorage.setItem('coffeeHouseMenu', JSON.stringify(data));
+            renderMenuTable();
+        }
+
+        // Cập nhật xem trước ảnh đại diện khi người dùng dán link vào ô input URL
+        function updateImagePreview(url) {
+            const previewImg = document.getElementById('image-preview');
+            if (url.trim() !== "") {
+                previewImg.src = url;
+            } else {
+                previewImg.src = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500";
+            }
+        }
+
+        function renderMenuTable() {
+            const tbody = document.getElementById('menu-table-body');
+            const searchKeyword = document.getElementById('search-input').value.toLowerCase();
+            const menu = getMenuData();
+            
+            tbody.innerHTML = '';
+            const filteredMenu = menu.filter(item => 
+                item.name.toLowerCase().includes(searchKeyword) || 
+                item.code.toLowerCase().includes(searchKeyword)
+            );
+            
+            document.getElementById('pagination-info').textContent = `Hiển thị 1 - ${filteredMenu.length} trong tổng số ${filteredMenu.length} món`;
+
+            if (filteredMenu.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-gray-400">Không tìm thấy món ăn nào</td></tr>`;
+                return;
+            }
+
+            filteredMenu.forEach(item => {
+                const isDrink = item.type === 'drink';
+                const typeBadge = isDrink 
+                    ? `<span class="px-2.5 py-1 bg-amber-100 text-amber-800 rounded text-[10px] font-bold">Đồ uống</span>`
+                    : `<span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded text-[10px] font-bold">Đồ ăn</span>`;
+
+                let catLabel = 'Bánh';
+                if (item.category === 'coffee') catLabel = 'Cà phê';
+                if (item.category === 'tea') catLabel = 'Trà trái cây';
+
+                const rowHTML = `
+                    <tr class="hover:bg-[#fff2da]/20 transition-colors">
+                        <td class="p-4 text-center">
+                            <input type="radio" name="product-select" value="${item.id}" class="accent-[#e28766] w-4 h-4 cursor-pointer">
+                        </td>
+                        <td class="p-4">${typeBadge}</td>
+                        <td class="p-4 text-center font-bold text-[#e28766]">${item.code}</td>
+                        <td class="p-4 font-bold text-sm text-[#542e23]">${item.name}</td>
+                        <td class="p-4 text-gray-500">${catLabel}</td>
+                        <td class="p-4 text-center">${item.unit || 'Ly'}</td>
+                        <td class="p-4 pr-5 text-right font-bold text-[#a16207]">${(item.price || 0).toLocaleString('vi-VN')} VND</td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', rowHTML);
+            });
+
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
+        const productModal = document.getElementById('product-modal');
+        const modalTitle = document.getElementById('modal-title');
+
+        function openModal(mode = 'add') {
+            if (mode === 'add') {
+                currentEditId = null;
+                modalTitle.textContent = "Thêm món mới";
+                document.getElementById('modal-product-name').value = "";
+                document.getElementById('modal-product-code').value = "";
+                document.getElementById('modal-product-price').value = "";
+                document.getElementById('modal-product-group').value = "coffee";
+                document.getElementById('modal-product-unit').value = "Ly";
+                document.getElementById('modal-product-kitchen').value = "Quầy bar";
+                document.querySelector('input[name="product-type"][value="drink"]').checked = true;
+                
+                // Mặc định định lượng nguyên vật liệu khi thêm món mới
+                document.getElementById('ingredient-nl01').value = "25";
+                document.getElementById('ingredient-nl02').value = "120";
+                
+                document.getElementById('modal-product-image-url').value = "";
+                document.getElementById('image-preview').src = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500";
+            } else {
+                const selectedRadio = document.querySelector('input[name="product-select"]:checked');
+                if (!selectedRadio) {
+                    alert("⚠️ Vui lòng tick chọn một món trong bảng để sửa!");
+                    return;
+                }
+                currentEditId = parseInt(selectedRadio.value);
+                modalTitle.textContent = "Sửa thông tin món";
+                
+                const menu = getMenuData();
+                const item = menu.find(m => m.id === currentEditId);
+
+                document.getElementById('modal-product-name').value = item.name;
+                document.getElementById('modal-product-code').value = item.code;
+                document.getElementById('modal-product-price').value = item.price;
+                document.getElementById('modal-product-group').value = item.category;
+                document.getElementById('modal-product-unit').value = item.unit || "Ly";
+                document.getElementById('modal-product-kitchen').value = item.kitchen || "Quầy bar";
+                document.querySelector(`input[name="product-type"][value="${item.type || 'drink'}"]`).checked = true;
+                
+                // Lấy định lượng nguyên liệu cũ của món đổ lên form để sửa
+                document.getElementById('ingredient-nl01').value = item.nvl1 !== undefined ? item.nvl1 : 25;
+                document.getElementById('ingredient-nl02').value = item.nvl2 !== undefined ? item.nvl2 : 120;
+
+                // Đổ link ảnh ra ô nhập để chỉnh sửa
+                document.getElementById('modal-product-image-url').value = item.image || "";
+                document.getElementById('image-preview').src = item.image || "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500";
+            }
+
+            productModal.classList.remove('hidden');
+            setTimeout(() => {
+                productModal.classList.remove('opacity-0');
+                productModal.querySelector('.max-w-5xl').classList.remove('scale-95');
+            }, 10);
+            
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function closeModal() {
+            productModal.classList.add('opacity-0');
+            productModal.querySelector('.max-w-5xl').classList.add('scale-95');
+            setTimeout(() => productModal.classList.add('hidden'), 250);
+        }
+
+        // LƯU DỮ LIỆU ĐÃ ĐỒNG BỘ ĐỊNH LƯỢNG VÀ LINK ẢNH
+        document.getElementById('save-modal-btn').addEventListener('click', function() {
+            const name = document.getElementById('modal-product-name').value.trim();
+            const code = document.getElementById('modal-product-code').value.trim();
+            const priceRaw = document.getElementById('modal-product-price').value.trim();
+            const category = document.getElementById('modal-product-group').value;
+            const unit = document.getElementById('modal-product-unit').value;
+            const kitchen = document.getElementById('modal-product-kitchen').value;
+            const type = document.querySelector('input[name="product-type"]:checked').value;
+            
+            // Lấy link ảnh từ ô input nhập liệu trực tiếp
+            let image = document.getElementById('modal-product-image-url').value.trim();
+            if (!image) {
+                image = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500"; // Ảnh mặc định nếu rỗng
+            }
+
+            // Lấy số lượng nguyên vật liệu chỉnh sửa từ ô input
+            const nvl1 = parseInt(document.getElementById('ingredient-nl01').value) || 0;
+            const nvl2 = parseInt(document.getElementById('ingredient-nl02').value) || 0;
+
+            if (!name) { alert("❌ Lỗi: Tên món không được bỏ trống!"); return; }
+            if (!code) { alert("❌ Lỗi: Mã món không được bỏ trống!"); return; }
+            if (!priceRaw) { alert("❌ Lỗi: Giá bán không được bỏ trống!"); return; }
+
+            const price = parseInt(priceRaw.toString().replace(/\./g, ''));
+            if (isNaN(price) || price <= 0) {
+                alert("❌ Lỗi: Giá bán phải là số hợp lệ lớn hơn 0!");
+                return;
+            }
+
+            let menu = getMenuData();
+
+            if (currentEditId === null) {
+                // Thêm món mới vào hệ thống thực đơn
+                const duplicate = menu.find(m => m.code.toLowerCase() === code.toLowerCase());
+                if (duplicate) { alert("❌ Lỗi: Mã món này đã được sử dụng!"); return; }
+
+                const newId = menu.length > 0 ? Math.max(...menu.map(m => m.id)) + 1 : 1;
+                menu.push({ id: newId, code, name, price, category, type, unit, kitchen, image, nvl1, nvl2 });
+                alert("🎉 Thêm món ăn mới thành công!");
+            } else {
+                // Lưu lại món ăn sau khi chỉnh sửa thông tin thành công
+                const item = menu.find(m => m.id === currentEditId);
+                if (item) {
+                    item.code = code;
+                    item.name = name;
+                    item.price = price;
+                    item.category = category;
+                    item.type = type;
+                    item.unit = unit;
+                    item.kitchen = kitchen;
+                    item.image = image;
+                    item.nvl1 = nvl1;
+                    item.nvl2 = nvl2;
+                    alert("🎉 Đã lưu thay đổi thông tin món thành công!");
+                }
+            }
+
+            saveMenuData(menu);
+            closeModal();
+        });
+
+        // XÓA MÓN
+        document.getElementById('delete-product-btn').addEventListener('click', function() {
+            const selectedRadio = document.querySelector('input[name="product-select"]:checked');
+            if (!selectedRadio) {
+                alert("⚠️ Vui lòng tick chọn món trong bảng trước khi xóa!");
+                return;
+            }
+            if (confirm("❓ Bạn có chắc chắn muốn xóa món đang chọn này không?")) {
+                const id = parseInt(selectedRadio.value);
+                let menu = getMenuData();
+                menu = menu.filter(m => m.id !== id);
+                saveMenuData(menu);
+                alert("🗑️ Đã xóa món ăn thành công!");
+            }
+        });
+
+        document.getElementById('open-add-modal-btn').addEventListener('click', () => openModal('add'));
+        document.getElementById('open-edit-modal-btn').addEventListener('click', () => openModal('edit'));
+        document.getElementById('close-modal-top').addEventListener('click', closeModal);
+        document.getElementById('close-modal-bottom').addEventListener('click', closeModal);
+
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMenuTable();
+
+            const currentUser = localStorage.getItem('currentUser') || "Quản lý";
+            const userDisplayEl = document.getElementById('current-user-display');
+            if (userDisplayEl) userDisplayEl.textContent = currentUser;
+            
+            if (window.lucide) window.lucide.createIcons();
+        });
+
+        // Toggle Sidebar
+        const toggleBtn = document.getElementById('toggle-sidebar');
+        const sidebar = document.getElementById('sidebar');
+        if (toggleBtn && sidebar) {
+            toggleBtn.addEventListener('click', () => sidebar.classList.toggle('collapsed'));
+        }
+
+        // Dropdown Đăng xuất
+        const userMenuBtn = document.getElementById('user-menu-btn');
+        const userDropdown = document.getElementById('user-dropdown');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        if (userMenuBtn && userDropdown) {
+            userMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userDropdown.classList.toggle('show');
+            });
+            document.addEventListener('click', function() {
+                userDropdown.classList.remove('show');
+            });
+        }
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+                localStorage.clear();
+                window.location.href = "login.html";
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Coffee House - Đăng nhập</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            /* Sử dụng ảnh nền thứ 2 */
+            background: url('e339f852c3fc3002e28cab63bd5aa39e.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Đẩy khối đăng nhập về bên trái giống mẫu */
+            padding-left: 10%; /* Khoảng cách từ lề trái vào */
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        /* Sử dụng ảnh logo thứ 3 */
+        .logo-img {
+            width: 260px;
+            height: auto;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+
+        .brand-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c1609; /* Màu nâu đậm đặc trưng */
+            letter-spacing: 0.5px;
+        }
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px; /* Bo góc mềm mại */
+            font-size: 18px;
+            color: #333;
+            outline: none;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .input-field::placeholder {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .input-field:focus {
+            border-color: #532c1a;
+            box-shadow: 0 2px 8px rgba(83, 44, 26, 0.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: #532c1a; /* Màu nút nâu chocolate giống ảnh mẫu */
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #422214; /* Tối hơn một chút khi di chuột vào */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        
+        <div class="logo-area">
+            <img src="download-removebg-preview.png" alt="The Coffee House Logo" class="logo-img">
+            <h1 class="brand-name">The Coffee House</h1>
+        </div>
+
+        <!-- 1. THAY ĐỔI: Thêm id="login-form" vào thẻ form -->
+        <form id="login-form" style="width: 100%;">
+            <div class="input-group">
+                <!-- 2. THAY ĐỔI: Thêm id="username" -->
+                <input type="text" id="username" class="input-field" placeholder="Tên đăng nhập" required>
+            </div>
+            
+            <div class="input-group">
+                <!-- 3. THAY ĐỔI: Thêm id="password" -->
+                <input type="password" id="password" class="input-field" placeholder="Mật khẩu" required>
+            </div>
+            
+            <button type="submit" class="btn-submit">ĐĂNG NHẬP</button>
+        </form>
+
+    </div>
+    <!-- 4. THÊM MỚI: Toàn bộ logic kiểm tra tài khoản và chuyển hướng ở đây -->
+    <script>
+    // 1. Định nghĩa danh sách tài khoản và phân quyền tương ứng
+    const USERS = [
+        { username: "tangduy1", password: "tangduy1", role: "manager", name: "Nguyễn Tăng Duy (Quản lý)" },
+        { username: "lehang", password: "lehang", role: "payment", name: "Lê Thị Thuý Hằng" },
+        { username: "ngqhuy", password: "ngqhuy", role: "payment", name: "Nguyễn Quang Huy" },
+        { username: "qkhanh", password: "qkhanh", role: "order", name: "Nguyễn Quốc Khánh" },
+        { username: "ncthang", password: "ncthang", role: "order", name: "Nguyễn Cao Thắng" },
+        { username: "hainguyen", password: "hainguyen", role: "order", name: "Nguyễn Minh Hải" },
+        { username: "hongnm", password: "hongnm", role: "order", name: "Nguyễn Minh Hồng" },
+        { username: "huongle", password: "huongle", role: "order", name: "Lê Thu Hường" },
+        { username: "dominh", password: "dominh", role: "kitchen", name: "Đỗ Công Minh" },
+        { username: "phamphap", password: "phamphap", role: "kitchen", name: "Phạm Nam Pháp" },
+    ];
+
+    const loginForm = document.getElementById('login-form');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // Tìm xem tài khoản nhập vào có khớp với user nào không
+            const foundUser = USERS.find(u => u.username === username && u.password === password);
+
+            if (foundUser) {
+                // Đăng nhập đúng -> Lưu thông tin vào hệ thống bộ nhớ trình duyệt
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userRole', foundUser.role); // Lưu quyền (manager, staff, kitchen)
+                localStorage.setItem('currentUser', foundUser.name); // Lưu tên hiển thị
+
+                // 2. Điều hướng trang đích phù hợp với từng quyền khi vừa đăng nhập xong
+                if (foundUser.role === "manager") {
+                    window.location.href = "ui-main.html"; // Quản lý vào màn hình chính / tổng quan
+                } else if (foundUser.role === "order") {
+                    window.location.href = "ui-order.html"; // Nhân viên phục vụ vào thẳng trang ghi Order
+                } else if (foundUser.role === "kitchen") {
+                    window.location.href = "ui-kitchen.html"; // Đầu bếp vào thẳng nhà bếp
+                } else if (foundUser.role === "payment") {
+                    window.location.href = "ui-kitchen.html"; // Thu ngân vào thẳng thu ngân
+                }
+            } else {
+                alert("Tên đăng nhập hoặc mật khẩu không chính xác!");
+                passwordInput.value = "";
+                passwordInput.focus();
+            }
+        });
+    }
+    </script>
+
+</body>
+</html>

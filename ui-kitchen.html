@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen - The Coffee House</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+       body { font-family: 'Quicksand', sans-serif; }
+        #sidebar.collapsed { width: 5rem !important; }
+        #sidebar.collapsed .sidebar-text { display: none !important; }
+        #sidebar.collapsed a { justify-content: center !important; padding-left: 0 !important; padding-right: 0 !important; }
+        #sidebar.collapsed a i, #sidebar.collapsed a svg { margin-right: 0 !important; }
+        #sidebar.collapsed .logo-container { justify-content: center !important; padding-left: 0 !important; padding-right: 0 !important; }
+        #sidebar.collapsed .logo-container i, #sidebar.collapsed .logo-container svg { margin-right: 0 !important; }
+        .dropdown-menu { display: none; }
+        .dropdown-menu.show { display: block; }
+    </style>
+</head>
+<body class="bg-[#fff2da] min-h-screen flex text-[#3d1f16]">
+
+<aside id="sidebar" class="w-64 bg-[#dcc5b4] flex flex-col flex-shrink-0 border-r border-[#542e23]/10 shadow-md transition-all duration-300 overflow-x-hidden">
+    <div class="logo-container h-16 flex items-center px-6 border-b border-[#542e23]/10 bg-[#542e23] text-white whitespace-nowrap">
+        <i data-lucide="coffee" class="w-6 h-6 mr-3 text-[#fff2da] flex-shrink-0"></i>
+        <span class="sidebar-text font-bold tracking-wide text-sm uppercase">The Coffee House</span>
+    </div>
+    
+    <nav class="flex-1 p-4 space-y-6 overflow-y-auto whitespace-nowrap">
+        <div>
+            <div class="space-y-1">
+                <a href="ui-main.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Màn hình chính</span>
+                </a>
+                <a href="ui-order.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Ghi Order</span>
+                </a>
+                <a href="ui-payment.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="wallet" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Thu ngân</span>
+                </a>
+                <a href="ui-kitchen.html" class="flex items-center px-3 py-2.5 bg-[#542e23] text-white font-semibold rounded-lg text-sm shadow-sm">
+                    <i data-lucide="chef-hat" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Nhà bếp</span>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <p class="sidebar-text px-3 text-[11px] font-bold uppercase tracking-wider text-[#542e23]/60 mb-2">Quản lý hệ thống</p>
+            <div class="space-y-1">
+                <a href="management-menu.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="utensils-crossed" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý thực đơn</span>
+                </a>
+                <a href="management-inventory.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="boxes" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý kho</span>
+                </a>
+                <a href="management-employee.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="users-round" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý nhân viên</span>
+                </a>
+                <a href="management-promo.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="ticket-percent" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Chương trình ưu đãi</span>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <p class="sidebar-text px-3 text-[11px] font-bold uppercase tracking-wider text-[#542e23]/60 mb-2">Thống kê</p>
+            <div class="space-y-1">
+                <a href="report-revenue.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Báo cáo doanh thu</span>
+                </a>
+                <a href="report-sales.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="line-chart" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Báo cáo bán hàng</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</aside>>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[#fff2da]">
+        
+        <header class="h-16 bg-[#dcc5b4]/40 border-b border-[#542e23]/10 flex items-center justify-between px-6 flex-shrink-0">
+            <div class="flex items-center space-x-2">
+                <button id="toggle-sidebar" class="p-1.5 rounded hover:bg-[#542e23]/5 cursor-pointer">
+                    <i data-lucide="menu" class="w-5 h-5 text-[#542e23]"></i>
+                </button>
+                <h2 class="text-base font-bold text-[#542e23]">Nhà bếp / Chế biến</h2>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="text-sm font-medium text-[#542e23] flex items-center space-x-2">
+                    <span id="current-user-display">Đang tải...</span>
+                </div>
+                <div class="relative">
+                    <button id="user-menu-btn" class="text-[#542e23] hover:text-red-600 transition-colors p-2 rounded-full hover:bg-[#542e23]/5 cursor-pointer">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                    </button>
+                    <div id="user-dropdown" class="dropdown-menu absolute right-0 mt-2 w-48 bg-white border border-[#542e23]/15 rounded-xl shadow-lg py-1 z-50">
+                        <button id="logout-btn" class="w-full text-left px-4 py-2.5 text-xs font-bold text-red-600 hover:bg-red-50 flex items-center gap-2 cursor-pointer transition-colors">
+                            <i data-lucide="log-out" class="w-4 h-4"></i> ĐĂNG XUẤT
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="p-4 flex gap-3 flex-shrink-0 select-none">
+            <button onclick="triggerOutofStock()" class="px-5 py-2 bg-[#ef4444] hover:bg-[#dc2626] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide cursor-pointer">
+                <i data-lucide="alert-circle" class="w-4 h-4"></i> Báo hết món
+            </button>
+            <button onclick="clearAllKitchenTables()" class="px-5 py-2 bg-[#10b981] hover:bg-[#059669] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide cursor-pointer">
+                <i data-lucide="check-check" class="w-4 h-4"></i> Trả tất cả món
+            </button>
+        </div>
+
+        <div id="kitchen-cards-container" class="flex-1 overflow-x-auto p-4 flex gap-4 items-start content-start min-h-0">
+            <div class="text-center text-xs text-gray-400 py-12 w-full">Không có bàn ăn nào cần chế biến.</div>
+        </div>
+
+        <footer id="kitchen-footer-nav" class="h-20 bg-[#dcc5b4]/40 border-t border-[#542e23]/10 flex items-center px-4 gap-3 flex-shrink-0 overflow-x-auto select-none">
+            <div class="text-xs text-gray-400/80 italic pl-2">Khu vực theo dõi nhanh trống</div>
+        </footer>
+
+    </main>
+
+    <script>
+        let allTables = [];
+
+        function loadKitchenData() {
+            allTables = JSON.parse(localStorage.getItem('coffeeHouseTables')) || [];
+            
+            let activeKitchenTables = allTables.filter(t => t.status === "occupied" && t.items && t.items.length > 0);
+            
+            activeKitchenTables = activeKitchenTables.filter(t => {
+                return t.items.some(item => !item.isDone);
+            });
+
+            renderKitchenCards(activeKitchenTables);
+            renderFooterNav(activeKitchenTables);
+        }
+
+        function renderKitchenCards(tablesList) {
+            const container = document.getElementById('kitchen-cards-container');
+            if (!container) return;
+
+            if (tablesList.length === 0) {
+                container.innerHTML = `<div class="text-center text-xs text-gray-400 py-12 w-full font-medium">🎉 Hiện tại không còn đơn nào nợ chế biến!</div>`;
+                return;
+            }
+
+            container.innerHTML = "";
+            tablesList.forEach(table => {
+                let itemsHTML = "";
+                
+                table.items.forEach((item, index) => {
+                    if (item.isDone) {
+                        itemsHTML += `
+                            <div class="flex justify-between items-center p-3 bg-white/60 border border-gray-200 rounded-xl text-xs font-bold text-gray-400 opacity-40 line-through select-none">
+                                <span>${item.name} (${item.quantity})</span>
+                                <span class="text-emerald-600 text-[10px] uppercase font-extrabold flex items-center gap-0.5"><i data-lucide="check" class="w-3 h-3"></i> Xong</span>
+                            </div>
+                        `;
+                    } else {
+                        itemsHTML += `
+                            <div class="flex justify-between items-center p-3 bg-white border border-[#542e23]/10 rounded-xl text-xs font-bold text-[#542e23] hover:border-[#e28766]/40 transition-all">
+                                <span>${item.name} <span class="text-[#f27024] font-extrabold">(${item.quantity})</span></span>
+                                <button onclick="finishItemByIdx(${table.id}, ${index})" class="text-[#e28766] hover:text-emerald-600 transition-colors cursor-pointer p-1 rounded hover:bg-gray-100" title="Báo xong">
+                                    <i data-lucide="bell" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        `;
+                    }
+                });
+
+                const cardHTML = `
+                    <div class="w-80 bg-white rounded-xl shadow-sm border border-[#542e23]/10 flex flex-col flex-shrink-0 overflow-hidden">
+                        <div class="p-3 bg-[#542e23] text-white flex justify-between items-center">
+                            <span class="text-xs font-bold tracking-wide">${table.name}</span>
+                            <span class="text-[11px] bg-white/20 px-2 py-0.5 rounded-full font-semibold">${table.guests || 0} Khách</span>
+                        </div>
+                        <div class="p-2 bg-[#fff2da]/20 text-[11px] font-bold text-[#542e23]/60 border-b border-dashed border-[#542e23]/10 px-3">
+                            Mã hóa đơn: HĐ 000${table.id}
+                        </div>
+                        <div class="p-2.5 space-y-1.5 max-h-[360px] overflow-y-auto bg-[#fff8f0]">
+                            ${itemsHTML}
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+            lucide.createIcons();
+        }
+
+        function renderFooterNav(tablesList) {
+            const footer = document.getElementById('kitchen-footer-nav');
+            if (!footer) return;
+
+            if (tablesList.length === 0) {
+                footer.innerHTML = `<div class="text-xs text-gray-400/80 italic pl-2">Khu vực trống</div>`;
+                return;
+            }
+
+            footer.innerHTML = "";
+            tablesList.forEach((table, idx) => {
+                let borderColors = ["border-[#ef4444]", "border-[#e28766]", "border-[#10b981]", "border-amber-500"];
+                let chosenColor = borderColors[idx % borderColors.length];
+                let unpaidCount = table.items.filter(i => !i.isDone).length;
+
+                const navHTML = `
+                    <div class="w-28 h-14 bg-white rounded-xl border border-[#542e23]/10 border-t-4 ${chosenColor} shadow-sm flex flex-col justify-center items-center transition-all flex-shrink-0">
+                        <span class="text-[10px] font-bold text-[#542e23]">${table.name}</span>
+                        <span class="text-[11px] font-extrabold text-red-500 mt-0.5">${unpaidCount} món nợ</span>
+                    </div>
+                `;
+                footer.insertAdjacentHTML('beforeend', navHTML);
+            });
+        }
+
+        function finishItemByIdx(tableId, itemIndex) {
+            let targetTable = allTables.find(t => t.id == tableId);
+            if (targetTable && targetTable.items && targetTable.items[itemIndex]) {
+                targetTable.items[itemIndex].isDone = true;
+                localStorage.setItem('coffeeHouseTables', JSON.stringify(allTables));
+                loadKitchenData();
+            }
+        }
+
+        function clearAllKitchenTables() {
+            let activeKitchenTables = allTables.filter(t => t.status === "occupied" && t.items && t.items.some(i => !i.isDone));
+            if (activeKitchenTables.length === 0) {
+                alert("Hiện tại không có bàn nào đang nợ món!");
+                return;
+            }
+
+            if (confirm("Xác nhận trả toàn bộ tất cả món nợ hiển thị trên màn hình?")) {
+                allTables.forEach(t => {
+                    if (t.status === "occupied" && t.items) {
+                        t.items.forEach(item => {
+                            item.isDone = true;
+                        });
+                    }
+                });
+                localStorage.setItem('coffeeHouseTables', JSON.stringify(allTables));
+                loadKitchenData();
+                alert("Đã xóa sạch nợ chế biến!");
+            }
+        }
+
+        function triggerOutofStock() {
+            let foodName = prompt("Nhập tên món ăn/thức uống muốn thông báo tạm hết suất:");
+            if (foodName && foodName.trim() !== "") {
+                alert(`Hệ thống đã ghi nhận thông báo hết món: [${foodName.trim()}]`);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userRole = localStorage.getItem('userRole');
+            const currentUser = localStorage.getItem('currentUser') || "Nhân viên Bếp";
+
+            if (isLoggedIn !== 'true' || !userRole) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            if (userRole !== "manager" && userRole !== "kitchen") {
+                alert("Tài khoản của bạn không có quyền truy cập vào chức năng Chế biến!");
+                if (userRole === "order") window.location.href = "ui-order.html";
+                else if (userRole === "payment") window.location.href = "ui-payment.html";
+                return;
+            }
+
+            const userDisplayEl = document.getElementById('current-user-display');
+            if (userDisplayEl) {
+                userDisplayEl.textContent = currentUser;
+            }
+
+            loadKitchenData();
+        });
+
+        const toggleBtn = document.getElementById('toggle-sidebar');
+        const sidebar = document.getElementById('sidebar');
+        if (toggleBtn && sidebar) {
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+
+        const userMenuBtn = document.getElementById('user-menu-btn');
+        const userDropdown = document.getElementById('user-dropdown');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        if (userMenuBtn && userDropdown) {
+            userMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userDropdown.classList.toggle('show');
+            });
+        }
+
+        document.addEventListener('click', function() {
+            if (userDropdown) userDropdown.classList.remove('show');
+        });
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+                localStorage.clear();
+                window.location.href = "login.html";
+            });
+        }
+    </script>
+</body>
+</html>

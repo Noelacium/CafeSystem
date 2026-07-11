@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - The Coffee House</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+       body { font-family: 'Quicksand', sans-serif; }
+        #sidebar.collapsed { width: 5rem !important; }
+        #sidebar.collapsed .sidebar-text { display: none !important; }
+        #sidebar.collapsed a { justify-content: center !important; padding-left: 0 !important; padding-right: 0 !important; }
+        #sidebar.collapsed a i, #sidebar.collapsed a svg { margin-right: 0 !important; }
+        #sidebar.collapsed .logo-container { justify-content: center !important; padding-left: 0 !important; padding-right: 0 !important; }
+        #sidebar.collapsed .logo-container i, #sidebar.collapsed .logo-container svg { margin-right: 0 !important; }
+        .dropdown-menu { display: none; }
+        .dropdown-menu.show { display: block; }
+    </style>
+</head>
+<body class="bg-[#fff2da] min-h-screen flex text-[#3d1f16]">
+
+<aside id="sidebar" class="w-64 bg-[#dcc5b4] flex flex-col flex-shrink-0 border-r border-[#542e23]/10 shadow-md transition-all duration-300 overflow-x-hidden">
+    <div class="logo-container h-16 flex items-center px-6 border-b border-[#542e23]/10 bg-[#542e23] text-white whitespace-nowrap">
+        <i data-lucide="coffee" class="w-6 h-6 mr-3 text-[#fff2da] flex-shrink-0"></i>
+        <span class="sidebar-text font-bold tracking-wide text-sm uppercase">The Coffee House</span>
+    </div>
+    
+    <nav class="flex-1 p-4 space-y-6 overflow-y-auto whitespace-nowrap">
+        <div>
+            <div class="space-y-1">
+                <a href="ui-main.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Màn hình chính</span>
+                </a>
+                <a href="ui-order.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Ghi Order</span>
+                </a>
+                <a href="ui-payment.html" class="flex items-center px-3 py-2.5 bg-[#542e23] text-white font-semibold rounded-lg text-sm shadow-sm">
+                    <i data-lucide="wallet" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Thu ngân</span>
+                </a>
+                <a href="ui-kitchen.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="chef-hat" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Nhà bếp</span>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <p class="sidebar-text px-3 text-[11px] font-bold uppercase tracking-wider text-[#542e23]/60 mb-2">Quản lý hệ thống</p>
+            <div class="space-y-1">
+                <a href="management-menu.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="utensils-crossed" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý thực đơn</span>
+                </a>
+                <a href="management-inventory.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="boxes" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý kho</span>
+                </a>
+                <a href="management-employee.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="users-round" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý nhân viên</span>
+                </a>
+                <a href="management-promo.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="ticket-percent" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Chương trình ưu đãi</span>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <p class="sidebar-text px-3 text-[11px] font-bold uppercase tracking-wider text-[#542e23]/60 mb-2">Thống kê</p>
+            <div class="space-y-1">
+                <a href="report-revenue.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Báo cáo doanh thu</span>
+                </a>
+                <a href="report-sales.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="line-chart" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Báo cáo bán hàng</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[#fff2da]">
+        <header class="h-16 bg-[#dcc5b4]/40 border-b border-[#542e23]/10 flex items-center justify-between px-6 flex-shrink-0">
+            <div class="flex items-center space-x-2">
+                <button id="toggle-sidebar" class="p-1.5 rounded hover:bg-[#542e23]/5 cursor-pointer">
+                    <i data-lucide="menu" class="w-5 h-5 text-[#542e23]"></i>
+                </button>
+                <h2 class="text-base font-bold text-[#542e23]">Thanh toán hóa đơn</h2>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="text-sm font-medium text-[#542e23] flex items-center space-x-2">
+                    <span id="current-user-display">Đang tải...</span>
+                </div>
+                <div class="relative">
+                    <button id="user-menu-btn" class="text-[#542e23] hover:text-red-600 transition-colors p-2 rounded-full hover:bg-[#542e23]/5 cursor-pointer">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                    </button>
+                    <div id="user-dropdown" class="dropdown-menu absolute right-0 mt-2 w-48 bg-white border border-[#542e23]/15 rounded-xl shadow-lg py-1 z-50">
+                        <button id="logout-btn" class="w-full text-left px-4 py-2.5 text-xs font-bold text-red-600 hover:bg-red-50 flex items-center gap-2 cursor-pointer transition-colors">
+                            <i data-lucide="log-out" class="w-4 h-4"></i> ĐĂNG XUẤT
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 flex overflow-hidden p-4 gap-4 min-h-0">
+            <div class="w-[35%] bg-white rounded-xl shadow-sm border border-[#542e23]/10 flex flex-col overflow-hidden flex-shrink-0">
+                <div class="p-3.5 bg-[#e28766] text-white font-bold text-xs flex items-center gap-2 tracking-wide uppercase flex-shrink-0">
+                    <i data-lucide="gift" class="w-4 h-4"></i> Chương trình khuyến mãi
+                </div>
+                
+                <div id="promo-container" class="flex-1 p-3 space-y-2.5 overflow-y-auto bg-[#fff8f0]">
+                </div>
+
+                <div class="p-3 bg-white border-t border-[#542e23]/10 flex justify-center text-[11px] text-gray-400 italic font-medium flex-shrink-0 select-none">
+                    * Bấm lại vào mã đang chọn để hủy áp dụng ưu đãi
+                </div>
+            </div>
+
+            <div class="w-[65%] bg-white rounded-xl shadow-sm border border-[#542e23]/10 flex flex-col overflow-hidden">
+                <div class="p-3.5 bg-white border-b border-[#542e23]/10 flex justify-between items-center flex-shrink-0">
+                    <div class="text-xs font-bold text-[#542e23] flex items-center gap-2">
+                        <span class="text-[#e28766] font-extrabold" id="invoice-id-display">HĐ-- /</span> 
+                        <span id="invoice-table-display">Chưa chọn bàn</span>
+                    </div>
+                    <div class="text-[11px] font-bold text-gray-400" id="invoice-time-display">--/--/---- --:--</div>
+                </div>
+
+                <div class="grid grid-cols-12 px-4 py-2 bg-gray-100/80 border-b border-[#542e23]/5 text-[11px] font-bold text-[#542e23]/70 uppercase flex-shrink-0">
+                    <div class="col-span-6">Tên món</div>
+                    <div class="col-span-3 text-center">Số lượng</div>
+                    <div class="col-span-3 text-right">Thành tiền</div>
+                </div>
+
+                <div id="invoice-items-list" class="flex-1 overflow-y-auto divide-y divide-[#542e23]/5">
+                    <div class="text-center text-xs text-gray-400 py-12">Không có dữ liệu món ăn cho bàn này.</div>
+                </div>
+
+                <div class="p-4 bg-white border-t border-[#542e23]/10 space-y-4 flex-shrink-0">
+                    <div class="flex flex-col gap-1.5 bg-[#fff2da]/30 p-3 rounded-xl border border-[#542e23]/5">
+                        <div class="flex justify-between text-xs font-bold text-[#542e23]/70">
+                            <span>Tổng tiền gốc:</span>
+                            <span id="base-amount-display">0 VND</span>
+                        </div>
+                        <div class="flex justify-between text-xs font-bold text-red-600">
+                            <span>Chiết khấu giảm giá:</span>
+                            <span id="discount-amount-display">-0 VND</span>
+                        </div>
+                        <hr class="border-[#542e23]/10 my-1">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-[#542e23]">Số tiền thực thu:</span>
+                            <span id="final-amount" class="text-base font-extrabold text-[#a16207]">0 VND</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 justify-between items-center select-none">
+                        <button onclick="goBack()" class="px-5 py-2.5 bg-[#542e23]/10 hover:bg-[#542e23]/20 text-[#542e23] text-xs font-bold rounded-xl flex items-center gap-2 transition-all cursor-pointer">
+                            <i data-lucide="chevron-left" class="w-4 h-4"></i> QUAY LẠI
+                        </button>
+                        <div class="flex gap-2">
+                            <button onclick="processPayment(false)" class="px-5 py-2.5 bg-[#542e23] hover:bg-[#3d1f16] text-white text-xs font-bold rounded-xl flex items-center gap-2 shadow-sm transition-all cursor-pointer">
+                                <i data-lucide="credit-card" class="w-4 h-4"></i> THANH TOÁN
+                            </button>
+                            <button onclick="processPayment(true)" class="px-5 py-2.5 bg-[#a16207] hover:bg-[#854d0e] text-white text-xs font-bold rounded-xl flex items-center gap-2 shadow-md transition-all cursor-pointer">
+                                <i data-lucide="printer" class="w-4 h-4"></i> THANH TOÁN & IN HÓA ĐƠN
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- LOGIC CẬP NHẬT: ĐIỀU HƯỚNG BÀN ĂN DỰ PHÒNG THÔNG MINH ---
+        let allTables = JSON.parse(localStorage.getItem('coffeeHouseTables')) || [];
+        let selectedTableName = localStorage.getItem('selectedTableName') || "";
+        
+        let activeTable = null;
+        let currentTableName = "";
+
+        // 1. ƯU TIÊN: Nếu có click chọn bàn cụ thể từ màn hình chính và bàn đó đang có khách
+        let clickTable = allTables.find(t => t.name.trim() === selectedTableName.trim());
+        if (clickTable && clickTable.status === "occupied") {
+            activeTable = clickTable;
+            currentTableName = activeTable.name;
+        } else {
+            // 2. DỰ PHÒNG: Nếu bấm trực tiếp từ Sidebar, tự động tìm bàn hoạt động mới nhất (ID lớn nhất)
+            let occupiedTables = allTables.filter(t => t.status === "occupied");
+            if (occupiedTables.length > 0) {
+                occupiedTables.sort((a, b) => b.id - a.id); // Trả về bàn có ID lớn nhất lên đầu
+                activeTable = occupiedTables[0];
+                currentTableName = activeTable.name;
+            } else {
+                // Nếu không có bàn nào đang hoạt động
+                activeTable = clickTable;
+                currentTableName = selectedTableName;
+            }
+        }
+        // -------------------------------------------------------------
+        
+        let baseAmount = 0;
+        let discountAmount = 0;
+        let selectedDiscountRate = 0;
+        let lastCheckedRadio = null; 
+
+        function initInvoice() {
+            if (!activeTable || !activeTable.items || activeTable.items.length === 0) {
+                document.getElementById('invoice-items-list').innerHTML = `<div class="text-center text-xs text-gray-400 py-12">Bàn này chưa gọi món hoặc đã thanh toán xong.</div>`;
+                return;
+            }
+
+            document.getElementById('invoice-id-display').textContent = `HĐ 000${activeTable.id} / `;
+            document.getElementById('invoice-table-display').textContent = `${activeTable.name}`;
+            
+            const now = new Date();
+            document.getElementById('invoice-time-display').textContent = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}  ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+            const itemsContainer = document.getElementById('invoice-items-list');
+            itemsContainer.innerHTML = "";
+            baseAmount = 0;
+            selectedDiscountRate = 0; 
+            lastCheckedRadio = null;   
+
+            activeTable.items.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                baseAmount += itemTotal;
+
+                const rowHTML = `
+                    <div class="grid grid-cols-12 px-4 py-3 items-center text-xs font-bold text-[#542e23]">
+                        <div class="col-span-6">${item.name}</div>
+                        <div class="col-span-3 text-center"><span class="bg-gray-200/80 px-2.5 py-0.5 rounded text-[11px]">${item.quantity}</span></div>
+                        <div class="col-span-3 text-right">${itemTotal.toLocaleString('vi-VN')} VND</div>
+                    </div>
+                `;
+                itemsContainer.insertAdjacentHTML('beforeend', rowHTML);
+            });
+
+            renderPromotions();
+            calculateFinalPrice();
+        }
+
+        function renderPromotions() {
+            const promoContainer = document.getElementById('promo-container');
+            if (!promoContainer) return;
+
+            const rules = [
+                { id: 5, rate: 0.05, minSpend: 150000, label: "Giảm giá 5% cho đơn hàng trên 150K" },
+                { id: 8, rate: 0.08, minSpend: 300000, label: "Giảm giá 8% cho đơn hàng trên 300K" },
+                { id: 10, rate: 0.10, minSpend: 500000, label: "Giảm giá 10% cho đơn hàng trên 500K" }
+            ];
+
+            promoContainer.innerHTML = "";
+
+            rules.forEach(rule => {
+                const isEligible = baseAmount >= rule.minSpend;
+                if (isEligible) {
+                    promoContainer.insertAdjacentHTML('beforeend', `
+                        <label class="flex items-center p-3.5 bg-[#fcd3c1]/40 border border-[#e28766]/30 rounded-xl cursor-pointer hover:bg-[#fcd3c1]/60 transition-all group">
+                            <input type="radio" name="promo-group" value="${rule.rate}" 
+                                   onclick="handlePromoClick(this, ${rule.rate})" 
+                                   class="w-4 h-4 accent-[#e28766] mr-3 flex-shrink-0 cursor-pointer">
+                            <span class="text-xs font-bold text-[#542e23] tracking-wide">${rule.label}</span>
+                        </label>
+                    `);
+                } else {
+                    promoContainer.insertAdjacentHTML('beforeend', `
+                        <label class="flex items-center p-3.5 bg-gray-100 border border-gray-200 rounded-xl opacity-50 cursor-not-allowed select-none">
+                            <input type="radio" disabled class="w-4 h-4 mr-3 flex-shrink-0">
+                            <span class="text-xs font-bold text-gray-400 tracking-wide">${rule.label} (Không đủ điều kiện)</span>
+                        </label>
+                    `);
+                }
+            });
+        }
+
+        function handlePromoClick(radioObj, rate) {
+            if (lastCheckedRadio === radioObj) {
+                radioObj.checked = false;
+                selectedDiscountRate = 0;
+                lastCheckedRadio = null;
+                calculateFinalPrice();
+            } else {
+                selectedDiscountRate = rate;
+                lastCheckedRadio = radioObj;
+                calculateFinalPrice();
+            }
+        }
+
+        UX=0;
+        function calculateFinalPrice() {
+            discountAmount = baseAmount * selectedDiscountRate;
+            let finalAmount = baseAmount - discountAmount;
+
+            document.getElementById('base-amount-display').textContent = baseAmount.toLocaleString('vi-VN') + " VND";
+            document.getElementById('discount-amount-display').textContent = "-" + discountAmount.toLocaleString('vi-VN') + " VND";
+            document.getElementById('final-amount').textContent = finalAmount.toLocaleString('vi-VN') + " VND";
+        }
+
+        function goBack() {
+            window.location.href = "ui-main.html";
+        }
+
+        function processPayment(shouldPrint) {
+            if (!activeTable || !activeTable.items || activeTable.items.length === 0) {
+                alert("Không có hóa đơn hợp lệ để thanh toán!");
+                return;
+            }
+
+            let confirmMsg = `Bạn xác nhận muốn thanh toán cho [${activeTable.name}]?\nSố tiền thực thu: ${document.getElementById('final-amount').textContent}`;
+            if (shouldPrint) {
+                confirmMsg += "\n(Hệ thống sẽ tự động xuất lệnh in hóa đơn ngay sau đó)";
+            }
+
+            if (confirm(confirmMsg)) {
+                activeTable.status = "empty";
+                activeTable.amount = 0;
+                activeTable.items = []; 
+                activeTable.guests = 0;
+
+                localStorage.setItem('coffeeHouseTables', JSON.stringify(allTables));
+
+                if (shouldPrint) {
+                    alert("🖨️ Đang kết nối máy in nhiệt... Đang in hóa đơn bán hàng!");
+                } else {
+                    alert("💸 Thanh toán thành công! Bàn đã được dọn sạch trạng thái.");
+                }
+
+                window.location.href = "ui-main.html";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userRole = localStorage.getItem('userRole');
+            const currentUser = localStorage.getItem('currentUser');
+
+            if (isLoggedIn !== 'true' || !userRole) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            if (userRole !== "manager" && userRole !== "payment") {
+                alert("Tài khoản của bạn không có quyền truy cập vào chức năng Thanh toán!");
+                if (userRole === "kitchen") window.location.href = "ui-kitchen.html";
+                else if (userRole === "order") window.location.href = "ui-order.html";
+                return;
+            }
+
+            const userDisplayEl = document.getElementById('current-user-display');
+            if (userDisplayEl) {
+                userDisplayEl.textContent = currentUser;
+            }
+
+            initInvoice();
+            lucide.createIcons();
+        });
+
+        const toggleBtn = document.getElementById('toggle-sidebar');
+        const sidebar = document.getElementById('sidebar');
+        if (toggleBtn && sidebar) {
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+
+        const userMenuBtn = document.getElementById('user-menu-btn');
+        const userDropdown = document.getElementById('user-dropdown');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        if (userMenuBtn && userDropdown) {
+            userMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userDropdown.classList.toggle('show');
+            });
+            document.addEventListener('click', function() {
+                userDropdown.classList.remove('show');
+            });
+        }
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function() {
+                localStorage.clear();
+                window.location.href = "login.html";
+            });
+        }
+    </script>
+</body>
+</html>

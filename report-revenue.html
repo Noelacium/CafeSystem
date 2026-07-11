@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo doanh thu - The Coffee House</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+       body { font-family: 'Quicksand', sans-serif; }
+
+        /* CSS bổ sung để xử lý việc thu gọn sidebar */
+        #sidebar.collapsed {
+            width: 5rem !important; /* Thu gọn chiều rộng sidebar về w-20 */
+        }
+        /* Ẩn toàn bộ chữ khi sidebar bị thu gọn */
+        #sidebar.collapsed .sidebar-text {
+            display: none !important;
+        }
+        /* Căn giữa lại các menu item khi thu gọn */
+        #sidebar.collapsed a {
+            justify-content: center !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        #sidebar.collapsed a i, 
+        #sidebar.collapsed a svg {
+            margin-right: 0 !important;
+        }
+        /* Căn giữa lại khu vực Logo phía trên */
+        #sidebar.collapsed .logo-container {
+            justify-content: center !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        #sidebar.collapsed .logo-container i,
+        #sidebar.collapsed .logo-container svg {
+            margin-right: 0 !important;
+        }
+                .dropdown-menu {
+            display: none;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-[#fff2da] min-h-screen flex text-[#3d1f16]">
+
+<aside id="sidebar" class="w-64 bg-[#dcc5b4] flex flex-col flex-shrink-0 border-r border-[#542e23]/10 shadow-md transition-all duration-300 overflow-x-hidden">
+    <div class="logo-container h-16 flex items-center px-6 border-b border-[#542e23]/10 bg-[#542e23] text-white whitespace-nowrap">
+        <i data-lucide="coffee" class="w-6 h-6 mr-3 text-[#fff2da] flex-shrink-0"></i>
+        <span class="sidebar-text font-bold tracking-wide text-sm uppercase">The Coffee House</span>
+    </div>
+    
+    <nav class="flex-1 p-4 space-y-6 overflow-y-auto whitespace-nowrap">
+        
+        <div>
+            <div class="space-y-1">
+                <a href="ui-main.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Màn hình chính</span>
+                </a>
+                <a href="ui-order.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Ghi Order</span>
+                </a>
+                <a href="ui-payment.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="wallet" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Thu ngân</span>
+                </a>
+                <a href="ui-kitchen.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="chef-hat" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Nhà bếp</span>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <p class="sidebar-text px-3 text-[11px] font-bold uppercase tracking-wider text-[#542e23]/60 mb-2">Quản lý hệ thống</p>
+            <div class="space-y-1">
+                <a href="management-menu.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="utensils-crossed" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý thực đơn</span>
+                </a>
+                <a href="management-inventory.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="boxes" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý kho</span>
+                </a>
+                <a href="management-employee.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="users-round" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý nhân viên</span>
+                </a>
+                <a href="management-promo.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="ticket-percent" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Chương trình ưu đãi</span>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <p class="sidebar-text px-3 text-[11px] font-bold uppercase tracking-wider text-[#542e23]/60 mb-2">Thống kê</p>
+            <div class="space-y-1">
+                <a href="report-revenue.html" class="flex items-center px-3 py-2.5 bg-[#542e23] text-white font-semibold rounded-lg text-sm shadow-sm">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Báo cáo doanh thu</span>
+                </a>
+                <a href="report-sales.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
+                    <i data-lucide="line-chart" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Báo cáo bán hàng</span>
+                </a>
+            </div>
+        </div>
+
+    </nav>
+</aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[#fff2da]">
+        
+        <header class="h-16 bg-[#dcc5b4]/40 border-b border-[#542e23]/10 flex items-center justify-between px-6">
+            <div class="flex items-center space-x-2">
+                <button id="toggle-sidebar" class="p-1.5 rounded hover:bg-[#542e23]/5 cursor-pointer">
+                    <i data-lucide="menu" class="w-5 h-5 text-[#542e23]"></i>
+                </button>
+                <h2 class="text-base font-bold text-[#542e23]">BÁO CÁO DOANH THU</h2>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="text-sm font-medium text-[#542e23] flex items-center space-x-2">
+                    <span id="current-user-display">Đang tải...</span>
+                </div>
+                <div class="relative">
+                    <button id="user-menu-btn" class="text-[#542e23] hover:text-red-600 transition-colors p-2 rounded-full hover:bg-[#542e23]/5 cursor-pointer">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                    </button>
+                    
+                    <div id="user-dropdown" class="dropdown-menu absolute right-0 mt-2 w-48 bg-white border border-[#542e23]/15 rounded-xl shadow-lg py-1 z-50">
+                        <button id="logout-btn" class="w-full text-left px-4 py-2.5 text-xs font-bold text-red-600 hover:bg-red-50 flex items-center gap-2 cursor-pointer transition-colors">
+                            <i data-lucide="log-out" class="w-4 h-4"></i> ĐĂNG XUẤT
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- THANH BỘ LỌC BÁO CÁO -->
+        <div class="p-4 bg-[#fff2da] flex-shrink-0 border-b border-[#542e23]/5">
+            <div class="bg-white p-3 rounded-xl border border-[#542e23]/10 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex flex-wrap items-center gap-4 text-xs font-bold text-[#542e23]">
+                    <div class="flex items-center gap-2">
+                        <select class="bg-white border border-[#542e23]/20 px-3 py-2 rounded-lg text-xs focus:outline-none focus:border-[#e28766] font-semibold">
+                            <option>Tháng này</option>
+                            <option>Hôm nay</option>
+                            <option>Tuần này</option>
+                            <option>Tháng trước</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="text-gray-500 font-medium">Từ ngày</span>
+                        <input type="date" value="2026-06-01" class="border border-[#542e23]/20 px-3 py-1.5 rounded-lg text-xs focus:outline-none focus:border-[#e28766] font-semibold">
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="text-gray-500 font-medium">Đến ngày</span>
+                        <input type="date" value="2026-06-30" class="border border-[#542e23]/20 px-3 py-1.5 rounded-lg text-xs focus:outline-none focus:border-[#e28766] font-semibold">
+                    </div>
+                </div>
+
+                <div class="flex gap-2">
+                    <button class="px-5 py-2 bg-[#542e23] hover:bg-[#3d1f16] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i> Lấy dữ liệu
+                    </button>
+                    <button class="px-5 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide">
+                        <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Xuất file Excel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BẢNG BÁO CÁO ĐÃ THAY ĐỔI BỐ CỤC THEO ĐÚNG LOGIC -->
+        <div class="flex-1 overflow-auto px-4 pb-4">
+            <div class="bg-white rounded-xl shadow-sm border border-[#542e23]/10 overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-[#542e23] text-white text-xs font-bold uppercase tracking-wider">
+                            <th class="p-4 pl-6 border-b border-[#542e23]/10 w-24 text-center">STT</th>
+                            <th class="p-4 border-b border-[#542e23]/10">Khoản mục</th>
+                            <th class="p-4 pr-6 border-b border-[#542e23]/10 text-right w-64">Giá trị</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-xs font-semibold text-[#542e23]">
+                        
+                        <!-- 1. KHOẢN MỤC DOANH THU (CÁC MỤC CON LÊN TRƯỚC) -->
+                        <tr class="hover:bg-[#fff2da]/10 transition-colors">
+                            <td class="p-4.5 text-center text-gray-400 font-normal">1.1</td>
+                            <td class="p-4.5 pl-8 text-gray-600">Tiền bán hàng</td>
+                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">85.445.213 VND</td>
+                        </tr>
+                        <tr class="hover:bg-[#fff2da]/10 transition-colors">
+                            <td class="p-4.5 text-center text-gray-400 font-normal">1.2</td>
+                            <td class="p-4.5 pl-8 text-gray-600">Tiền thu từ dịch vụ</td>
+                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">7.801.773 VND</td>
+                        </tr>
+                        <tr class="hover:bg-[#fff2da]/10 transition-colors">
+                            <td class="p-4.5 text-center text-gray-400 font-normal">1.3</td>
+                            <td class="p-4.5 pl-8 text-gray-600">Tiền thu khác</td>
+                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">5.545.889 VND</td>
+                        </tr>
+                        <!-- DÒNG TỔNG DOANH THU Ở DƯỚI -->
+                        <tr class="bg-emerald-50/40 font-bold text-sm border-b-2 border-emerald-600/10">
+                            <td class="p-4.5 text-center text-emerald-800">1</td>
+                            <td class="p-4.5 text-emerald-900 uppercase">Tổng doanh thu</td>
+                            <td class="p-4.5 pr-6 text-right text-emerald-700 font-extrabold text-base">98.792.875 VND</td>
+                        </tr>
+
+                        <!-- 2. KHOẢN MỤC CHI PHÍ (CÁC MỤC CON LÊN TRƯỚC) -->
+                        <tr class="hover:bg-[#fff2da]/10 transition-colors">
+                            <td class="p-4.5 text-center text-gray-400 font-normal">2.1</td>
+                            <td class="p-4.5 pl-8 text-gray-600">Chi phí nguyên vật liệu</td>
+                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">23.192.158 VND</td>
+                        </tr>
+                        <tr class="hover:bg-[#fff2da]/10 transition-colors">
+                            <td class="p-4.5 text-center text-gray-400 font-normal">2.2</td>
+                            <td class="p-4.5 pl-8 text-gray-600">Chi phí nhân công</td>
+                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">35.476.257 VND</td>
+                        </tr>
+                        <tr class="hover:bg-[#fff2da]/10 transition-colors">
+                            <td class="p-4.5 text-center text-gray-400 font-normal">2.3</td>
+                            <td class="p-4.5 pl-8 text-gray-600">Chi phí khác (điện, nước, wifi, thuế GTGT, khuyến mãi...)</td>
+                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">5.546.954 VND</td>
+                        </tr>
+                        <!-- DÒNG TỔNG CHI PHÍ Ở DƯỚI -->
+                        <tr class="bg-red-50/40 font-bold text-sm border-b-2 border-red-600/10">
+                            <td class="p-4.5 text-center text-red-800">2</td>
+                            <td class="p-4.5 text-red-900 uppercase">Tổng chi phí</td>
+                            <td class="p-4.5 pr-6 text-right text-red-600 font-extrabold text-base">64.215.369 VND</td>
+                        </tr>
+
+                        <!-- 3. KẾT QUẢ CUỐI CÙNG: LỢI NHUẬN -->
+                        <tr class="bg-amber-100/60 font-bold text-sm border-t border-[#542e23]/20">
+                            <td class="p-5 text-center text-gray-900 text-base">3</td>
+                            <td class="p-5 text-gray-900 text-base uppercase tracking-wide">Lợi nhuận ròng</td>
+                            <td class="p-5 pr-6 text-right text-[#a16207] font-black text-lg">34.577.506 VND</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const toggleBtn = document.getElementById('toggle-sidebar');
+        const sidebar = document.getElementById('sidebar');
+
+        if (toggleBtn && sidebar) {
+            toggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+                        document.addEventListener("DOMContentLoaded", function() {
+            // 1. Kiểm tra xem đã đăng nhập chưa
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userRole = localStorage.getItem('userRole');
+            const currentUser = localStorage.getItem('currentUser'); // Lấy tên user từ file login của bạn
+
+            if (isLoggedIn !== 'true' || !userRole) {
+                // Nếu chưa đăng nhập, đá thẳng về trang login
+                window.location.href = "login.html";
+                return;
+            }
+
+            // 2. CHẶN TRUY CẬP: Nếu KHÔNG PHẢI manager, order thì không cho xem trang này
+            if (userRole !== "manager") {
+                alert("Tài khoản của bạn không có quyền truy cập vào chức năng Báo cáo doanh thu!");
+                
+                // Tự động điều hướng họ về đúng trang của họ
+                if (userRole === "kitchen") {
+                    window.location.href = "ui-kitchen.html";
+                } else if (userRole === "payment") {
+                    window.location.href = "ui-payment.html";
+                } else if (userRole === "order") {
+                    window.location.href = "ui-order.html";
+                }
+                return; // Dừng thực thi các lệnh bên dưới
+            }
+            // 3. ĐỔI TÊN ĐĂNG NHẬP ĐỘNG
+            const userDisplayEl = document.getElementById('current-user-display');
+            if (userDisplayEl) {
+                userDisplayEl.textContent = currentUser;
+            }
+        });
+                    // 2. SỰ KIỆN ĐÓNG MỞ DROPDOWN ĐĂNG XUẤT
+            const userMenuBtn = document.getElementById('user-menu-btn');
+            const userDropdown = document.getElementById('user-dropdown');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            userMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Ngăn sự kiện click lan ra ngoài
+                userDropdown.classList.toggle('show');
+            });
+
+            // Click ra rìa ngoài menu thì tự động ẩn dropdown đi
+            document.addEventListener('click', function() {
+                userDropdown.classList.remove('show');
+            });
+
+            // 3. XỬ LÝ LOGIC KHI BẤM NÚT ĐĂNG XUẤT
+            logoutBtn.addEventListener('click', function() {
+                // Xóa sạch trạng thái đăng nhập trong trình duyệt
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('currentUser');
+                
+                // Quay ngược về trang đăng nhập
+                window.location.href = "login.html";
+            });
+    </script>
+</body>
+</html>

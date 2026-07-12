@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý thực đơn - The Coffee House</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
        body { font-family: 'Quicksand', sans-serif; }
@@ -128,6 +128,7 @@
             </div>
         </header>
 
+        <!-- THANH CHỨC NĂNG -->
         <div class="p-4 flex justify-between items-center bg-[#fff2da] flex-shrink-0">
             <div class="flex gap-2">
                 <button id="open-add-modal-btn" class="px-5 py-2 bg-[#e28766] hover:bg-[#d07353] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide cursor-pointer">
@@ -141,13 +142,14 @@
                 </button>
             </div>
             <div class="relative w-64">
-                <input type="text" id="search-input" oninput="renderMenuTable()" placeholder="Tìm kiếm tên món, mã món..." class="w-full bg-white pl-9 pr-4 py-2 rounded-lg border border-[#542e23]/10 text-xs focus:outline-none focus:border-[#e28766] font-medium">
+                <input type="text" id="search-input" oninput="resetToFirstPageAndRender()" placeholder="Tìm kiếm tên món, mã món..." class="w-full bg-white pl-9 pr-4 py-2 rounded-lg border border-[#542e23]/10 text-xs focus:outline-none focus:border-[#e28766] font-medium">
                 <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-2.5"></i>
             </div>
         </div>
 
+        <!-- BẢNG HIỂN THỊ THỰC ĐƠN -->
         <div class="flex-1 overflow-auto px-4 pb-4">
-            <div class="bg-white rounded-xl shadow-sm border border-[#542e23]/10 overflow-hidden">
+            <div class="bg-white rounded-xl shadow-sm border border-[#542e23]/10 overfslow-hidden">
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-[#542e23] text-white text-xs font-bold uppercase tracking-wider">
@@ -161,31 +163,34 @@
                         </tr>
                     </thead>
                     <tbody id="menu-table-body" class="divide-y divide-gray-100 text-xs font-semibold text-[#542e23]">
-                        </tbody>
+                        <!-- Render động từ JavaScript -->
+                    </tbody>
                 </table>
             </div>
         </div>
 
+        <!-- THANH PHÂN TRANG -->
         <footer class="h-14 bg-[#dcc5b4]/40 border-t border-[#542e23]/10 flex items-center justify-between px-6 flex-shrink-0 text-xs font-bold text-[#542e23]">
             <div id="pagination-info" class="text-gray-500">Hiển thị...</div>
             <div class="flex items-center gap-2">
-                <button class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-gray-400 hover:bg-white transition-all cursor-not-allowed" disabled>
+                <button id="btn-first-page" class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-[#542e23] hover:bg-[#542e23]/5 transition-all cursor-pointer">
                     <i data-lucide="chevrons-left" class="w-4 h-4"></i>
                 </button>
-                <button class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-gray-400 hover:bg-white transition-all cursor-not-allowed" disabled>
+                <button id="btn-prev-page" class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-[#542e23] hover:bg-[#542e23]/5 transition-all cursor-pointer">
                     <i data-lucide="chevron-left" class="w-4 h-4"></i>
                 </button>
-                <span class="px-4 py-1.5 bg-[#542e23] text-white rounded-lg shadow-sm font-bold">Trang 1 / 1</span>
-                <button class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-gray-400 cursor-not-allowed" disabled>
+                <span id="page-indicator" class="px-4 py-1.5 bg-[#542e23] text-white rounded-lg shadow-sm font-bold">Trang 1 / 1</span>
+                <button id="btn-next-page" class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-[#542e23] hover:bg-[#542e23]/5 transition-all cursor-pointer">
                     <i data-lucide="chevron-right" class="w-4 h-4"></i>
                 </button>
-                <button class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-gray-400 cursor-not-allowed" disabled>
+                <button id="btn-last-page" class="w-8 h-8 bg-white border border-[#542e23]/10 rounded-lg flex items-center justify-center text-[#542e23] hover:bg-[#542e23]/5 transition-all cursor-pointer">
                     <i data-lucide="chevrons-right" class="w-4 h-4"></i>
                 </button>
             </div>
         </footer>
     </main>
 
+    <!-- MODAL NỔI: THÊM / SỬA MÓN ĂN -->
     <div id="product-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 p-4 select-none">
         <div class="bg-white rounded-xl shadow-2xl border-4 border-[#542e23] w-full max-w-5xl overflow-hidden flex flex-col transform transition-transform duration-300 scale-95 max-h-[90vh]">
             
@@ -259,36 +264,72 @@
                         </div>
                     </div>
 
+                    <!-- BẢNG ĐỊNH LƯỢNG NGUYÊN VẬT LIỆU CHỌN TRỰC TIẾP TỪ DROPDOWN VÀ BỎ MÃ NVL -->
                     <div class="border border-gray-300 rounded-lg p-3 bg-white space-y-2 shadow-xs">
-                        <div class="text-xs font-bold uppercase tracking-wider text-[#542e23] border-b border-gray-200 pb-1 flex justify-between items-center">
-                            <span>Định lượng nguyên vật liệu (Có thể sửa số lượng)</span>
+                        <div class="text-xs font-bold uppercase tracking-wider text-[#542e23] border-b border-gray-200 pb-1">
+                            <span>Định lượng nguyên vật liệu thành phần</span>
                         </div>
                         <div class="overflow-x-auto max-h-48 overflow-y-auto">
                             <table class="w-full border-collapse border border-gray-300 text-center">
                                 <thead>
                                     <tr class="bg-[#dcc5b4]/50 text-[#542e23]">
-                                        <th class="border border-gray-300 p-2 w-1/4">Mã NVL</th>
-                                        <th class="border border-gray-300 p-2 w-1/3 text-left">Nguyên vật liệu</th>
-                                        <th class="border border-gray-300 p-2 w-1/5">Số lượng</th>
-                                        <th class="border border-gray-300 p-2 w-1/5">Đơn vị tính</th>
+                                        <th class="border border-gray-300 p-2 w-1/2 text-left">Tên Nguyên Vật Liệu</th>
+                                        <th class="border border-gray-300 p-2 w-1/4">Số lượng</th>
+                                        <th class="border border-gray-300 p-2 w-1/4">Đơn vị tính</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-gray-50/50 font-medium">
                                     <tr>
-                                        <td class="border border-gray-300 p-1.5">NL01</td>
-                                        <td class="border border-gray-300 p-1.5 text-left">Hạt cà phê Arabica</td>
-                                        <td class="border border-gray-300 p-1.5">
-                                            <input type="number" id="ingredient-nl01" value="25" class="w-full bg-amber-50 border border-amber-300 rounded p-1 text-center font-bold text-orange-600 focus:outline-none focus:bg-white">
+                                        <td class="border border-gray-300 p-1.5 text-left">
+                                            <select id="ingredient-name-1" class="w-full bg-amber-50/60 border border-amber-200 rounded p-1 font-bold text-[#542e23] focus:outline-none focus:bg-white cursor-pointer">
+                                                <option value="Hạt cà phê Arabica">Hạt cà phê Arabica</option>
+                                                <option value="Hạt cà phê Robusta">Hạt cà phê Robusta</option>
+                                                <option value="Sữa tươi thanh trùng">Sữa tươi thanh trùng</option>
+                                                <option value="Đường nước tinh luyện">Đường nước tinh luyện</option>
+                                                <option value="Cốt trà đen đậm vị">Cốt trà đen đậm vị</option>
+                                                <option value="Cốt trà Oolong túi lọc">Cốt trà Oolong túi lọc</option>
+                                                <option value="Bột Matcha Nhật Bản">Bột Matcha Nhật Bản</option>
+                                                <option value="Kem tươi béo Whipping">Kem tươi béo Whipping</option>
+                                                <option value="Bột cacao nguyên chất">Bột cacao nguyên chất</option>
+                                                <option value="Bột mì cao cấp">Bột mì cao cấp</option>
+                                            </select>
                                         </td>
-                                        <td class="border border-gray-300 p-1.5 text-gray-500">gram</td>
+                                        <td class="border border-gray-300 p-1.5">
+                                            <input type="number" id="ingredient-qty-1" value="25" class="w-full bg-amber-50 border border-amber-300 rounded p-1 text-center font-bold text-orange-600 focus:outline-none focus:bg-white">
+                                        </td>
+                                        <td class="border border-gray-300 p-1.5">
+                                            <select id="ingredient-unit-1" class="w-full bg-transparent border-none text-center text-gray-500 focus:outline-none cursor-pointer">
+                                                <option value="gram">gram</option>
+                                                <option value="mL">mL</option>
+                                                <option value="Cái">Cái</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td class="border border-gray-300 p-1.5">NL02</td>
-                                        <td class="border border-gray-300 p-1.5 text-left">Sữa tươi thanh trùng</td>
-                                        <td class="border border-gray-300 p-1.5">
-                                            <input type="number" id="ingredient-nl02" value="120" class="w-full bg-amber-50 border border-amber-300 rounded p-1 text-center font-bold text-orange-600 focus:outline-none focus:bg-white">
+                                        <td class="border border-gray-300 p-1.5 text-left">
+                                            <select id="ingredient-name-2" class="w-full bg-amber-50/60 border border-amber-200 rounded p-1 font-bold text-[#542e23] focus:outline-none focus:bg-white cursor-pointer">
+                                                <option value="Sữa tươi thanh trùng">Sữa tươi thanh trùng</option>
+                                                <option value="Hạt cà phê Arabica">Hạt cà phê Arabica</option>
+                                                <option value="Hạt cà phê Robusta">Hạt cà phê Robusta</option>
+                                                <option value="Đường nước tinh luyện">Đường nước tinh luyện</option>
+                                                <option value="Cốt trà đen đậm vị">Cốt trà đen đậm vị</option>
+                                                <option value="Cốt trà Oolong túi lọc">Cốt trà Oolong túi lọc</option>
+                                                <option value="Bột Matcha Nhật Bản">Bột Matcha Nhật Bản</option>
+                                                <option value="Kem tươi béo Whipping">Kem tươi béo Whipping</option>
+                                                <option value="Bột cacao nguyên chất">Bột cacao nguyên chất</option>
+                                                <option value="Bột mì cao cấp">Bột mì cao cấp</option>
+                                            </select>
                                         </td>
-                                        <td class="border border-gray-300 p-1.5 text-gray-500">mL</td>
+                                        <td class="border border-gray-300 p-1.5">
+                                            <input type="number" id="ingredient-qty-2" value="120" class="w-full bg-amber-50 border border-amber-300 rounded p-1 text-center font-bold text-orange-600 focus:outline-none focus:bg-white">
+                                        </td>
+                                        <td class="border border-gray-300 p-1.5">
+                                            <select id="ingredient-unit-2" class="w-full bg-transparent border-none text-center text-gray-500 focus:outline-none cursor-pointer">
+                                                <option value="mL">mL</option>
+                                                <option value="gram">gram</option>
+                                                <option value="Cái">Cái</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -296,6 +337,7 @@
                     </div>
                 </div>
 
+                <!-- CỘT CHỈNH SỬA LINK ẢNH TRỰC TIẾP -->
                 <div class="border border-gray-300 rounded-lg p-4 bg-white flex flex-col items-center justify-between shadow-xs min-h-[320px]">
                     <span class="w-full text-left font-bold border-b border-gray-100 pb-1">Ảnh đại diện món ăn</span>
                     <div class="w-full flex-1 flex flex-col items-center justify-center p-2 relative group mt-2">
@@ -322,50 +364,60 @@
     </div>
 
     <script>
-        const initial27Products = [
-            // CÀ PHÊ (9 món)
-            { id: 1, code: "U01", name: "Cappuccino", price: 65000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?q=80&w=500", nvl1: 25, nvl2: 120 },
-            { id: 2, code: "U02", name: "Espresso", price: 39000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=500", nvl1: 20, nvl2: 0 },
-            { id: 3, code: "U03", name: "Americano", price: 45000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1510972527409-cef1b4579d5d?q=80&w=500", nvl1: 20, nvl2: 0 },
-            { id: 4, code: "U04", name: "Bạc Sỉu Đá", price: 35000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=500", nvl1: 15, nvl2: 150 },
-            { id: 5, code: "U05", name: "Cà Phê Sữa Đá", price: 35000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1553909489-cd47e0907980?q=80&w=500", nvl1: 20, nvl2: 40 },
-            { id: 6, code: "U06", name: "Cafe Latte", price: 65000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=500", nvl1: 20, nvl2: 140 },
-            { id: 7, code: "U07", name: "Caramel Macchiato", price: 69000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1595434035824-2fa74ddd8804?q=80&w=500", nvl1: 20, nvl2: 120 },
-            { id: 8, code: "U08", name: "Mocha Đá", price: 69000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1607687325211-15f97ee59fd7?q=80&w=500", nvl1: 20, nvl2: 100 },
-            { id: 9, code: "U09", name: "Cold Brew Truyền Thống", price: 50000, category: "coffee", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=500", nvl1: 25, nvl2: 0 },
+        const productsData = [
+            { id: 1, name: 'Cappuccino', price: 65000, category: 'coffee', image: 'https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?q=80&w=500&auto=format&fit=crop' },
+            { id: 2, name: 'Espresso', price: 39000, category: 'coffee', image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=500&auto=format&fit=crop' },
+            { id: 3, name: 'Cà phê đen đá', price: 25000, category: 'coffee', image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500&auto=format&fit=crop' },
+            { id: 4, name: 'Cà Phê Sữa Đá', price: 35000, category: 'coffee', image: 'https://images.unsplash.com/photo-1629688825560-917b9727c15b?q=80&w=500&auto=format&fit=crop' },
+            { id: 5, name: 'Bạc Sỉu nóng/đá', price: 35000, category: 'coffee', image: 'https://plus.unsplash.com/premium_photo-1661562031871-317d77e64290?q=80&w=500&auto=format&fit=crop' },
+            { id: 6, name: 'Cafe Latte', price: 65000, category: 'coffee', image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=500&auto=format&fit=crop' },
+            { id: 7, name: 'Flat White', price: 45000, category: 'coffee', image: 'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?q=80&w=500&auto=format&fit=crop' },
+            { id: 8, name: 'Cold Brew Americano', price: 45000, category: 'coffee', image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=500&auto=format&fit=crop' },
+            { id: 9, name: 'Caramel Macchiato', price: 69000, category: 'coffee', image: 'https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/cach_lam_caramel_macchiato_thumb_b2c933a8cb.jpg' },
             
-            // TRÀ TRÁI CÂY (9 món)
-            { id: 10, code: "U10", name: "Trà Đào Cam Sả", price: 49000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 11, code: "U11", name: "Trà Thạch Đào", price: 49000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 12, code: "U12", name: "Trà Oolong Vải Thạch", price: 45000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://plus.unsplash.com/premium_photo-1687977548737-afa5a6bcb85f?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 13, code: "U13", name: "Trà Long Nhãn Hạt Sen", price: 55000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 14, code: "U14", name: "Trà Sữa Matcha Tây Bắc", price: 59000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?q=80&w=500", nvl1: 0, nvl2: 80 },
-            { id: 15, code: "U15", name: "Trà Xoài Khô Thạch Chanh", price: 55000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 16, code: "U16", name: "Trà Đen Macchiato", price: 45000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?q=80&w=500", nvl1: 0, nvl2: 50 },
-            { id: 17, code: "U17", name: "Hồng Trà Sữa Trân Châu", price: 49000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1541658016709-82535e94bc69?q=80&w=500", nvl1: 0, nvl2: 60 },
-            { id: 18, code: "U18", name: "Trà Hoa Cúc Mật Ong", price: 42000, category: "tea", type: "drink", unit: "Ly", kitchen: "Quầy bar", image: "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?q=80&w=500", nvl1: 0, nvl2: 0 },
+            { id: 10, name: 'Trà Đào Cam Sả', price: 49000, category: 'tea', image: 'https://plus.unsplash.com/premium_photo-1687977548737-afa5a6bcb85f?q=80&w=1171&auto=format&fit=crop' },
+            { id: 11, name: 'Trà Thạch Đào', price: 49000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdcnil3Zp2Bep3CQ8IR4DHKRN2qUteu4v6OdniPOdeRbACBUw0zWsftpBP&s=10' },
+            { id: 12, name: 'Trà Oolong Vải Thạch', price: 45000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzfW3g_Y7kusN8UYl9GVla7_kcj954MMbPZJWYEU21Qa4U413ZVEx5Yhk&s=10' },
+            { id: 13, name: 'Trà Long Nhãn Hạt Sen', price: 49000, category: 'tea', image: 'https://cdn2.fptshop.com.vn/unsafe/800x0/tra_long_nhan_1_3a9544eae3.jpeg' },
+            { id: 14, name: 'Trà Dâu Tây Đá Tuyết', price: 55000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROaTRbLQBhmk8fuyDwQ0J2SxH59olBQzsCIplQI18NG-bGDfNT7atsjkA&s=10' },
+            { id: 15, name: 'Trà Xoài Chanh Dây', price: 49000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4qe6w5EneblfcnNCtvSYcrp2Juy0tU1_nUcam76ULrg2N1AX4SIoMi5ph&s=10' },
+            { id: 16, name: 'Hi-Tea Vải Thảo Mộc', price: 55000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM3gaHsNoHCO2HwJt_8EbZOsL5arIltZ_ezAPfXx_BbHs2PPjf1zk25MsU&s=10' },
+            { id: 17, name: 'Hi-Tea Yuzu Trân Châu', price: 59000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaaKeSefHq1LrXosMU5PBBdNydJZULy5ejCSz85XXp_jYYWtbCsQQYiMFR&s=10' },
+            { id: 18, name: 'Trà Sữa Oolong Trân Châu', price: 45000, category: 'tea', image: 'https://dayphache.edu.vn/wp-content/uploads/2020/05/tra-sua-o-long.jpg' },
 
-            // BÁNH NGỌT (9 món)
-            { id: 19, code: "A01", name: "Bánh Tiramisu Choco", price: 45000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 20, code: "A02", name: "Bánh Mousse Ca Cao", price: 35000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 21, code: "A03", name: "Bánh Phô Mai Việt Quất", price: 49000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 22, code: "A04", name: "Bánh Croissant Trứng Muối", price: 39000, category: "cake", type: "food", unit: "Cái", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 23, code: "A05", name: "Bánh Mì Hoa Cúc", price: 45000, category: "cake", type: "food", unit: "Cái", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 24, code: "A06", name: "Macaron Combo 3 Vị", price: 42000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 25, code: "A07", name: "Bánh Su Kem Vanilla", price: 30000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 26, code: "A08", name: "Bánh Red Velvet", price: 49000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?q=80&w=500", nvl1: 0, nvl2: 0 },
-            { id: 27, code: "A09", name: "Bánh Chocolate Lava", price: 45000, category: "cake", type: "food", unit: "Phần", kitchen: "Nhà bếp", image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=500", nvl1: 0, nvl2: 0 }
+            { id: 19, name: 'Bánh Tiramisu', price: 45000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuCw6OUVlOrmzhavD5zey1qnYh_re26leLDMwEXr8P4v9wDyCY6MWMvOY&s=10' },
+            { id: 20, name: 'Bánh Mousse Ca Cao', price: 35000, category: 'cake', image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=500&auto=format&fit=crop' },
+            { id: 21, name: 'Bánh Phô Mai Việt Quất', price: 49000, category: 'cake', image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=500&auto=format&fit=crop' },
+            { id: 22, name: 'Bánh Sừng Bò Croissant', price: 29000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTONiS9ONtpozR_1hNB-cMImUtMN25jgJBUep8d32DJDho3bOCucH3XtPY&s=10' },
+            { id: 23, name: 'Bánh Red Velvet', price: 45000, category: 'cake', image: 'https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?q=80&w=500&auto=format&fit=crop' },
+            { id: 24, name: 'Bánh Su Kem Choux', price: 30000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsedgSmW8WpXgBt7zRzsjm0VrvN33EnHEutKceyRXVL0IKzODZsv7DbFXE&s=10' },
+            { id: 25, name: 'Bánh bông lan trứng muối', price: 45000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHTX39ibomg7umRubAWXSVmicTI-2n9jbe_laDlamtTj-w49R-ScwewGSW &s=10' },
+            { id: 26, name: 'Bánh Matcha Green Tea', price: 39000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDi3AhhW48Ct9J3JeP0KBOvDRNWY5F1dNbA7tX2xxwqZeGFUtK93o7bHU&s=10' },
+            { id: 27, name: 'Bánh Macaron', price: 55000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUymzDcCQo0ZcOTMKLavZSa2DTx5eyIPmXvpatpKvuHylXn7NJFwX1UZry&s=10' }
         ];
 
         let currentEditId = null;
+        
+        // CẤU HÌNH PHÂN TRANG (MỖI TRANG ĐÚNG 10 MÓN)
+        let currentPage = 1;
+        const rowsPerPage = 10;
 
+        // Thay thế hàm getMenuData cũ bằng hàm này:
         function getMenuData() {
             let data = localStorage.getItem('coffeeHouseMenu');
             if (!data) {
-                localStorage.setItem('coffeeHouseMenu', JSON.stringify(initial27Products));
-                return initial27Products;
+                // Đổi thành productsData để lấy mảng mặc định ở dòng 366
+                localStorage.setItem('coffeeHouseMenu', JSON.stringify(productsData));
+                return productsData;
             }
-            return JSON.parse(data);
+            let parsed = JSON.parse(data);
+            
+            // Đoạn này cũng sửa thành productsData.length luôn nhé
+            if (parsed.length < productsData.length) {
+                localStorage.setItem('coffeeHouseMenu', JSON.stringify(productsData));
+                return productsData;
+            }
+            return parsed;
         }
 
         function saveMenuData(data) {
@@ -373,7 +425,6 @@
             renderMenuTable();
         }
 
-        // Cập nhật xem trước ảnh đại diện khi người dùng dán link vào ô input URL
         function updateImagePreview(url) {
             const previewImg = document.getElementById('image-preview');
             if (url.trim() !== "") {
@@ -383,25 +434,74 @@
             }
         }
 
+        // KHI GÕ TÌM KIẾM THÌ RESET VỀ TRANG 1 TRƯỚC RỒI MỚI CHẠY HÀM RENDER
+        function resetToFirstPageAndRender() {
+            currentPage = 1;
+            renderMenuTable();
+        }
+
+        // HÀM RENDER BẢNG ĐÃ ĐƯỢC TÍNH TOÁN PHÂN TRANG CHUẨN 10 DÒNG/TRANG
         function renderMenuTable() {
             const tbody = document.getElementById('menu-table-body');
             const searchKeyword = document.getElementById('search-input').value.toLowerCase();
             const menu = getMenuData();
             
             tbody.innerHTML = '';
+            
+            // Lọc danh sách theo từ khóa tìm kiếm trước
             const filteredMenu = menu.filter(item => 
                 item.name.toLowerCase().includes(searchKeyword) || 
                 item.code.toLowerCase().includes(searchKeyword)
             );
-            
-            document.getElementById('pagination-info').textContent = `Hiển thị 1 - ${filteredMenu.length} trong tổng số ${filteredMenu.length} món`;
 
-            if (filteredMenu.length === 0) {
+            const totalItems = filteredMenu.length;
+            const totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+
+            // Kiểm tra ranh giới trang hiện tại phòng khi xóa món làm giảm trang
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
+            // Tính chỉ số bắt đầu và kết thúc của trang hiện tại
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const paginatedItems = filteredMenu.slice(startIndex, endIndex);
+            
+            // Cập nhật thông tin hiển thị ở footer
+            const startDisplay = totalItems === 0 ? 0 : startIndex + 1;
+            const endDisplay = endIndex > totalItems ? totalItems : endIndex;
+            document.getElementById('pagination-info').textContent = `Hiển thị ${startDisplay} - ${endDisplay} trong tổng số ${totalItems} món`;
+            document.getElementById('page-indicator').textContent = `Trang ${currentPage} / ${totalPages}`;
+
+            // Quản lý trạng thái đóng/mở các nút bấm phân trang (Xử lý class CSS)
+            document.getElementById('btn-first-page').disabled = (currentPage === 1);
+            document.getElementById('btn-prev-page').disabled = (currentPage === 1);
+            document.getElementById('btn-next-page').disabled = (currentPage === totalPages);
+            document.getElementById('btn-last-page').disabled = (currentPage === totalPages);
+
+            const opacityDisabled = "opacity-40 cursor-not-allowed";
+            if (currentPage === 1) {
+                document.getElementById('btn-first-page').classList.add('opacity-40', 'cursor-not-allowed');
+                document.getElementById('btn-prev-page').classList.add('opacity-40', 'cursor-not-allowed');
+            } else {
+                document.getElementById('btn-first-page').classList.remove('opacity-40', 'cursor-not-allowed');
+                document.getElementById('btn-prev-page').classList.remove('opacity-40', 'cursor-not-allowed');
+            }
+
+            if (currentPage === totalPages) {
+                document.getElementById('btn-next-page').classList.add('opacity-40', 'cursor-not-allowed');
+                document.getElementById('btn-last-page').classList.add('opacity-40', 'cursor-not-allowed');
+            } else {
+                document.getElementById('btn-next-page').classList.remove('opacity-40', 'cursor-not-allowed');
+                document.getElementById('btn-last-page').classList.remove('opacity-40', 'cursor-not-allowed');
+            }
+
+            if (paginatedItems.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-gray-400">Không tìm thấy món ăn nào</td></tr>`;
                 return;
             }
 
-            filteredMenu.forEach(item => {
+            // Render dữ liệu món ăn ra màn hình
+            paginatedItems.forEach(item => {
                 const isDrink = item.type === 'drink';
                 const typeBadge = isDrink 
                     ? `<span class="px-2.5 py-1 bg-amber-100 text-amber-800 rounded text-[10px] font-bold">Đồ uống</span>`
@@ -432,6 +532,30 @@
             }
         }
 
+        // ĐĂNG KÝ SỰ KIỆN CHO CÁC NÚT BẤM CHUYỂN TRANG Ở FOOTER
+        document.getElementById('btn-first-page').addEventListener('click', function() {
+            if (currentPage > 1) { currentPage = 1; renderMenuTable(); }
+        });
+        document.getElementById('btn-prev-page').addEventListener('click', function() {
+            if (currentPage > 1) { currentPage--; renderMenuTable(); }
+        });
+        document.getElementById('btn-next-page').addEventListener('click', function() {
+            const menu = getMenuData();
+            const searchKeyword = document.getElementById('search-input').value.toLowerCase();
+            const filteredMenu = menu.filter(item => item.name.toLowerCase().includes(searchKeyword) || item.code.toLowerCase().includes(searchKeyword));
+            const totalPages = Math.ceil(filteredMenu.length / rowsPerPage) || 1;
+            
+            if (currentPage < totalPages) { currentPage++; renderMenuTable(); }
+        });
+        document.getElementById('btn-last-page').addEventListener('click', function() {
+            const menu = getMenuData();
+            const searchKeyword = document.getElementById('search-input').value.toLowerCase();
+            const filteredMenu = menu.filter(item => item.name.toLowerCase().includes(searchKeyword) || item.code.toLowerCase().includes(searchKeyword));
+            const totalPages = Math.ceil(filteredMenu.length / rowsPerPage) || 1;
+            
+            if (currentPage < totalPages) { currentPage = totalPages; renderMenuTable(); }
+        });
+
         const productModal = document.getElementById('product-modal');
         const modalTitle = document.getElementById('modal-title');
 
@@ -447,9 +571,13 @@
                 document.getElementById('modal-product-kitchen').value = "Quầy bar";
                 document.querySelector('input[name="product-type"][value="drink"]').checked = true;
                 
-                // Mặc định định lượng nguyên vật liệu khi thêm món mới
-                document.getElementById('ingredient-nl01').value = "25";
-                document.getElementById('ingredient-nl02').value = "120";
+                document.getElementById('ingredient-name-1').value = "Hạt cà phê Arabica";
+                document.getElementById('ingredient-qty-1').value = "25";
+                document.getElementById('ingredient-unit-1').value = "gram";
+                
+                document.getElementById('ingredient-name-2').value = "Sữa tươi thanh trùng";
+                document.getElementById('ingredient-qty-2').value = "120";
+                document.getElementById('ingredient-unit-2').value = "mL";
                 
                 document.getElementById('modal-product-image-url').value = "";
                 document.getElementById('image-preview').src = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500";
@@ -473,11 +601,14 @@
                 document.getElementById('modal-product-kitchen').value = item.kitchen || "Quầy bar";
                 document.querySelector(`input[name="product-type"][value="${item.type || 'drink'}"]`).checked = true;
                 
-                // Lấy định lượng nguyên liệu cũ của món đổ lên form để sửa
-                document.getElementById('ingredient-nl01').value = item.nvl1 !== undefined ? item.nvl1 : 25;
-                document.getElementById('ingredient-nl02').value = item.nvl2 !== undefined ? item.nvl2 : 120;
+                document.getElementById('ingredient-name-1').value = item.ingName1 || "Hạt cà phê Arabica";
+                document.getElementById('ingredient-qty-1').value = item.ingQty1 !== undefined ? item.ingQty1 : 25;
+                document.getElementById('ingredient-unit-1').value = item.ingUnit1 || "gram";
 
-                // Đổ link ảnh ra ô nhập để chỉnh sửa
+                document.getElementById('ingredient-name-2').value = item.ingName2 || "Sữa tươi thanh trùng";
+                document.getElementById('ingredient-qty-2').value = item.ingQty2 !== undefined ? item.ingQty2 : 120;
+                document.getElementById('ingredient-unit-2').value = item.ingUnit2 || "mL";
+
                 document.getElementById('modal-product-image-url').value = item.image || "";
                 document.getElementById('image-preview').src = item.image || "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500";
             }
@@ -497,7 +628,6 @@
             setTimeout(() => productModal.classList.add('hidden'), 250);
         }
 
-        // LƯU DỮ LIỆU ĐÃ ĐỒNG BỘ ĐỊNH LƯỢNG VÀ LINK ẢNH
         document.getElementById('save-modal-btn').addEventListener('click', function() {
             const name = document.getElementById('modal-product-name').value.trim();
             const code = document.getElementById('modal-product-code').value.trim();
@@ -507,15 +637,18 @@
             const kitchen = document.getElementById('modal-product-kitchen').value;
             const type = document.querySelector('input[name="product-type"]:checked').value;
             
-            // Lấy link ảnh từ ô input nhập liệu trực tiếp
             let image = document.getElementById('modal-product-image-url').value.trim();
             if (!image) {
-                image = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500"; // Ảnh mặc định nếu rỗng
+                image = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500";
             }
 
-            // Lấy số lượng nguyên vật liệu chỉnh sửa từ ô input
-            const nvl1 = parseInt(document.getElementById('ingredient-nl01').value) || 0;
-            const nvl2 = parseInt(document.getElementById('ingredient-nl02').value) || 0;
+            const ingName1 = document.getElementById('ingredient-name-1').value;
+            const ingQty1 = parseInt(document.getElementById('ingredient-qty-1').value) || 0;
+            const ingUnit1 = document.getElementById('ingredient-unit-1').value;
+
+            const ingName2 = document.getElementById('ingredient-name-2').value;
+            const ingQty2 = parseInt(document.getElementById('ingredient-qty-2').value) || 0;
+            const ingUnit2 = document.getElementById('ingredient-unit-2').value;
 
             if (!name) { alert("❌ Lỗi: Tên món không được bỏ trống!"); return; }
             if (!code) { alert("❌ Lỗi: Mã món không được bỏ trống!"); return; }
@@ -523,22 +656,20 @@
 
             const price = parseInt(priceRaw.toString().replace(/\./g, ''));
             if (isNaN(price) || price <= 0) {
-                alert("❌ Lỗi: Giá bán phải là số hợp lệ lớn hơn 0!");
+                alert("❌ Lỗi: Giá bán phải lớn hơn 0!");
                 return;
             }
 
             let menu = getMenuData();
 
             if (currentEditId === null) {
-                // Thêm món mới vào hệ thống thực đơn
                 const duplicate = menu.find(m => m.code.toLowerCase() === code.toLowerCase());
-                if (duplicate) { alert("❌ Lỗi: Mã món này đã được sử dụng!"); return; }
+                if (duplicate) { alert("❌ Lỗi: Mã món này đã tồn tại!"); return; }
 
                 const newId = menu.length > 0 ? Math.max(...menu.map(m => m.id)) + 1 : 1;
-                menu.push({ id: newId, code, name, price, category, type, unit, kitchen, image, nvl1, nvl2 });
-                alert("🎉 Thêm món ăn mới thành công!");
+                menu.push({ id: newId, code, name, price, category, type, unit, kitchen, image, ingName1, ingQty1, ingUnit1, ingName2, ingQty2, ingUnit2 });
+                alert("🎉 Thêm món mới thành công!");
             } else {
-                // Lưu lại món ăn sau khi chỉnh sửa thông tin thành công
                 const item = menu.find(m => m.id === currentEditId);
                 if (item) {
                     item.code = code;
@@ -549,8 +680,12 @@
                     item.unit = unit;
                     item.kitchen = kitchen;
                     item.image = image;
-                    item.nvl1 = nvl1;
-                    item.nvl2 = nvl2;
+                    item.ingName1 = ingName1;
+                    item.ingQty1 = ingQty1;
+                    item.ingUnit1 = ingUnit1;
+                    item.ingName2 = ingName2;
+                    item.ingQty2 = ingQty2;
+                    item.ingUnit2 = ingUnit2;
                     alert("🎉 Đã lưu thay đổi thông tin món thành công!");
                 }
             }
@@ -559,7 +694,6 @@
             closeModal();
         });
 
-        // XÓA MÓN
         document.getElementById('delete-product-btn').addEventListener('click', function() {
             const selectedRadio = document.querySelector('input[name="product-select"]:checked');
             if (!selectedRadio) {
@@ -590,14 +724,12 @@
             if (window.lucide) window.lucide.createIcons();
         });
 
-        // Toggle Sidebar
         const toggleBtn = document.getElementById('toggle-sidebar');
         const sidebar = document.getElementById('sidebar');
         if (toggleBtn && sidebar) {
             toggleBtn.addEventListener('click', () => sidebar.classList.toggle('collapsed'));
         }
 
-        // Dropdown Đăng xuất
         const userMenuBtn = document.getElementById('user-menu-btn');
         const userDropdown = document.getElementById('user-dropdown');
         const logoutBtn = document.getElementById('logout-btn');

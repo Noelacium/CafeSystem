@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <style>
        body { font-family: 'Quicksand', sans-serif; }
 
@@ -139,30 +140,31 @@
             <div class="bg-white p-3 rounded-xl border border-[#542e23]/10 flex flex-wrap items-center justify-between gap-4">
                 <div class="flex flex-wrap items-center gap-4 text-xs font-bold text-[#542e23]">
                     <div class="flex items-center gap-2">
-                        <select class="bg-white border border-[#542e23]/20 px-3 py-2 rounded-lg text-xs focus:outline-none focus:border-[#e28766] font-semibold">
-                            <option>Tháng này</option>
-                            <option>Hôm nay</option>
-                            <option>Tuần này</option>
-                            <option>Tháng trước</option>
+                        <select id="period-select" class="bg-white border border-[#542e23]/20 px-3 py-2 rounded-lg text-xs focus:outline-none focus:border-[#e28766] font-semibold">
+                            <option value="thisMonth">Tháng này</option>
+                            <option value="today">Hôm nay</option>
+                            <option value="thisWeek">Tuần này</option>
+                            <option value="lastMonth">Tháng trước</option>
+                            <option value="custom">Tùy chỉnh</option>
                         </select>
                     </div>
 
                     <div class="flex items-center gap-2">
                         <span class="text-gray-500 font-medium">Từ ngày</span>
-                        <input type="date" value="2026-06-01" class="border border-[#542e23]/20 px-3 py-1.5 rounded-lg text-xs focus:outline-none focus:border-[#e28766] font-semibold">
+                        <input id="from-date" type="date" value="2026-07-01" class="border border-[#542e23]/20 px-3 py-1.5 rounded-lg text-xs focus:outline-none focus:border-[#e28766] font-semibold">
                     </div>
 
                     <div class="flex items-center gap-2">
                         <span class="text-gray-500 font-medium">Đến ngày</span>
-                        <input type="date" value="2026-06-30" class="border border-[#542e23]/20 px-3 py-1.5 rounded-lg text-xs focus:outline-none focus:border-[#e28766] font-semibold">
+                        <input id="to-date" type="date" value="2026-07-16" class="border border-[#542e23]/20 px-3 py-1.5 rounded-lg text-xs focus:outline-none focus:border-[#e28766] font-semibold">
                     </div>
                 </div>
 
                 <div class="flex gap-2">
-                    <button class="px-5 py-2 bg-[#542e23] hover:bg-[#3d1f16] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide">
+                    <button id="fetch-data-btn" class="px-5 py-2 bg-[#542e23] hover:bg-[#3d1f16] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide cursor-pointer">
                         <i data-lucide="refresh-cw" class="w-4 h-4"></i> Lấy dữ liệu
                     </button>
-                    <button class="px-5 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide">
+                    <button id="export-excel-btn" class="px-5 py-2 bg-[#16a34a] hover:bg-[#15803d] text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-2 transition-colors uppercase tracking-wide cursor-pointer">
                         <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Xuất file Excel
                     </button>
                 </div>
@@ -186,53 +188,53 @@
                         <tr class="hover:bg-[#fff2da]/10 transition-colors">
                             <td class="p-4.5 text-center text-gray-400 font-normal">1.1</td>
                             <td class="p-4.5 pl-8 text-gray-600">Tiền bán hàng</td>
-                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">85.445.213 VND</td>
+                            <td id="val-sales" class="p-4.5 pr-6 text-right font-bold text-gray-700">0 VND</td>
                         </tr>
                         <tr class="hover:bg-[#fff2da]/10 transition-colors">
                             <td class="p-4.5 text-center text-gray-400 font-normal">1.2</td>
                             <td class="p-4.5 pl-8 text-gray-600">Tiền thu từ dịch vụ</td>
-                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">7.801.773 VND</td>
+                            <td id="val-service" class="p-4.5 pr-6 text-right font-bold text-gray-700">0 VND</td>
                         </tr>
                         <tr class="hover:bg-[#fff2da]/10 transition-colors">
                             <td class="p-4.5 text-center text-gray-400 font-normal">1.3</td>
                             <td class="p-4.5 pl-8 text-gray-600">Tiền thu khác</td>
-                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">5.545.889 VND</td>
+                            <td id="val-other-income" class="p-4.5 pr-6 text-right font-bold text-gray-700">0 VND</td>
                         </tr>
                         <!-- DÒNG TỔNG DOANH THU Ở DƯỚI -->
                         <tr class="bg-emerald-50/40 font-bold text-sm border-b-2 border-emerald-600/10">
                             <td class="p-4.5 text-center text-emerald-800">1</td>
                             <td class="p-4.5 text-emerald-900 uppercase">Tổng doanh thu</td>
-                            <td class="p-4.5 pr-6 text-right text-emerald-700 font-extrabold text-base">98.792.875 VND</td>
+                            <td id="val-total-revenue" class="p-4.5 pr-6 text-right text-emerald-700 font-extrabold text-base">0 VND</td>
                         </tr>
 
                         <!-- 2. KHOẢN MỤC CHI PHÍ (CÁC MỤC CON LÊN TRƯỚC) -->
                         <tr class="hover:bg-[#fff2da]/10 transition-colors">
                             <td class="p-4.5 text-center text-gray-400 font-normal">2.1</td>
                             <td class="p-4.5 pl-8 text-gray-600">Chi phí nguyên vật liệu</td>
-                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">23.192.158 VND</td>
+                            <td id="val-material" class="p-4.5 pr-6 text-right font-bold text-gray-700">0 VND</td>
                         </tr>
                         <tr class="hover:bg-[#fff2da]/10 transition-colors">
                             <td class="p-4.5 text-center text-gray-400 font-normal">2.2</td>
                             <td class="p-4.5 pl-8 text-gray-600">Chi phí nhân công</td>
-                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">35.476.257 VND</td>
+                            <td id="val-labor" class="p-4.5 pr-6 text-right font-bold text-gray-700">0 VND</td>
                         </tr>
                         <tr class="hover:bg-[#fff2da]/10 transition-colors">
                             <td class="p-4.5 text-center text-gray-400 font-normal">2.3</td>
                             <td class="p-4.5 pl-8 text-gray-600">Chi phí khác (điện, nước, wifi, thuế GTGT, khuyến mãi...)</td>
-                            <td class="p-4.5 pr-6 text-right font-bold text-gray-700">5.546.954 VND</td>
+                            <td id="val-other-cost" class="p-4.5 pr-6 text-right font-bold text-gray-700">0 VND</td>
                         </tr>
                         <!-- DÒNG TỔNG CHI PHÍ Ở DƯỚI -->
                         <tr class="bg-red-50/40 font-bold text-sm border-b-2 border-red-600/10">
                             <td class="p-4.5 text-center text-red-800">2</td>
                             <td class="p-4.5 text-red-900 uppercase">Tổng chi phí</td>
-                            <td class="p-4.5 pr-6 text-right text-red-600 font-extrabold text-base">64.215.369 VND</td>
+                            <td id="val-total-cost" class="p-4.5 pr-6 text-right text-red-600 font-extrabold text-base">0 VND</td>
                         </tr>
 
                         <!-- 3. KẾT QUẢ CUỐI CÙNG: LỢI NHUẬN -->
                         <tr class="bg-amber-100/60 font-bold text-sm border-t border-[#542e23]/20">
                             <td class="p-5 text-center text-gray-900 text-base">3</td>
                             <td class="p-5 text-gray-900 text-base uppercase tracking-wide">Lợi nhuận ròng</td>
-                            <td class="p-5 pr-6 text-right text-[#a16207] font-black text-lg">34.577.506 VND</td>
+                            <td id="val-profit" class="p-5 pr-6 text-right text-[#a16207] font-black text-lg">0 VND</td>
                         </tr>
                     </tbody>
                 </table>
@@ -309,6 +311,203 @@
                 // Quay ngược về trang đăng nhập
                 window.location.href = "login.html";
             });
+
+    // ================== BÁO CÁO DOANH THU: DỮ LIỆU MẪU & XỬ LÝ ==================
+    (function () {
+        // ---- 1. Sinh dữ liệu mẫu cho từng ngày trong ~5 tháng gần nhất ----
+        function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+        function toDateStr(d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+        function randRange(min, max) { return min + Math.random() * (max - min); }
+
+        function generateSampleData() {
+            const data = {};
+            const today = new Date('2026-07-16'); // "hôm nay" theo mốc dữ liệu demo
+            const start = new Date(today);
+            start.setMonth(start.getMonth() - 5);
+
+            for (let d = new Date(start); d <= today; d.setDate(d.getDate() + 1)) {
+                const dow = d.getDay(); // 0 = CN, 6 = T7 -> doanh thu cao hơn cuối tuần
+                const weekendFactor = (dow === 0 || dow === 6) ? 1.35 : 1;
+
+                const sales = randRange(2200000, 3400000) * weekendFactor;
+                const service = randRange(180000, 320000) * weekendFactor;
+                const otherIncome = randRange(90000, 220000);
+                const totalRevenue = sales + service + otherIncome;
+
+                const material = totalRevenue * randRange(0.22, 0.27);
+                const labor = randRange(950000, 1250000);
+                const otherCost = totalRevenue * randRange(0.05, 0.08);
+
+                data[toDateStr(d)] = {
+                    sales: Math.round(sales),
+                    service: Math.round(service),
+                    otherIncome: Math.round(otherIncome),
+                    material: Math.round(material),
+                    labor: Math.round(labor),
+                    otherCost: Math.round(otherCost)
+                };
+            }
+            return data;
+        }
+
+        const sampleData = generateSampleData();
+
+        // ---- 2. Định dạng tiền VND ----
+        function formatVND(n) {
+            return Math.round(n).toLocaleString('vi-VN') + ' VND';
+        }
+
+        // ---- 3. Xác định khoảng ngày theo lựa chọn nhanh ----
+        function getRangeForPeriod(period) {
+            const today = new Date('2026-07-16');
+            let from = new Date(today), to = new Date(today);
+
+            if (period === 'today') {
+                // from = to = hôm nay
+            } else if (period === 'thisWeek') {
+                const dow = today.getDay() === 0 ? 7 : today.getDay(); // Thứ 2 = 1 ... CN = 7
+                from = new Date(today);
+                from.setDate(today.getDate() - (dow - 1));
+                to = new Date(today);
+            } else if (period === 'thisMonth') {
+                from = new Date(today.getFullYear(), today.getMonth(), 1);
+                to = new Date(today);
+            } else if (period === 'lastMonth') {
+                from = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+                to = new Date(today.getFullYear(), today.getMonth(), 0);
+            }
+            return { from: toDateStr(from), to: toDateStr(to) };
+        }
+
+        // ---- 4. Tổng hợp dữ liệu trong khoảng ngày ----
+        function aggregate(fromStr, toStr) {
+            const totals = { sales: 0, service: 0, otherIncome: 0, material: 0, labor: 0, otherCost: 0 };
+            Object.keys(sampleData).forEach(function (dateKey) {
+                if (dateKey >= fromStr && dateKey <= toStr) {
+                    const day = sampleData[dateKey];
+                    totals.sales += day.sales;
+                    totals.service += day.service;
+                    totals.otherIncome += day.otherIncome;
+                    totals.material += day.material;
+                    totals.labor += day.labor;
+                    totals.otherCost += day.otherCost;
+                }
+            });
+            return totals;
+        }
+
+        // ---- 5. Cập nhật bảng báo cáo trên màn hình ----
+        let lastTotals = null;
+        function renderTotals(totals) {
+            lastTotals = totals;
+            const totalRevenue = totals.sales + totals.service + totals.otherIncome;
+            const totalCost = totals.material + totals.labor + totals.otherCost;
+            const profit = totalRevenue - totalCost;
+
+            document.getElementById('val-sales').textContent = formatVND(totals.sales);
+            document.getElementById('val-service').textContent = formatVND(totals.service);
+            document.getElementById('val-other-income').textContent = formatVND(totals.otherIncome);
+            document.getElementById('val-total-revenue').textContent = formatVND(totalRevenue);
+
+            document.getElementById('val-material').textContent = formatVND(totals.material);
+            document.getElementById('val-labor').textContent = formatVND(totals.labor);
+            document.getElementById('val-other-cost').textContent = formatVND(totals.otherCost);
+            document.getElementById('val-total-cost').textContent = formatVND(totalCost);
+
+            document.getElementById('val-profit').textContent = formatVND(profit);
+        }
+
+        // ---- 6. Gắn sự kiện cho các phần tử lọc ----
+        const periodSelect = document.getElementById('period-select');
+        const fromInput = document.getElementById('from-date');
+        const toInput = document.getElementById('to-date');
+        const fetchBtn = document.getElementById('fetch-data-btn');
+        const exportBtn = document.getElementById('export-excel-btn');
+
+        periodSelect.addEventListener('change', function () {
+            if (periodSelect.value === 'custom') return; // để người dùng tự chọn ngày
+            const range = getRangeForPeriod(periodSelect.value);
+            fromInput.value = range.from;
+            toInput.value = range.to;
+        });
+
+        // Nếu người dùng tự sửa ngày, chuyển select sang "Tùy chỉnh"
+        [fromInput, toInput].forEach(function (el) {
+            el.addEventListener('change', function () {
+                periodSelect.value = 'custom';
+            });
+        });
+
+        fetchBtn.addEventListener('click', function () {
+            const fromStr = fromInput.value;
+            const toStr = toInput.value;
+
+            if (!fromStr || !toStr) {
+                alert('Vui lòng chọn đầy đủ "Từ ngày" và "Đến ngày".');
+                return;
+            }
+            if (fromStr > toStr) {
+                alert('"Từ ngày" phải nhỏ hơn hoặc bằng "Đến ngày".');
+                return;
+            }
+
+            const originalHTML = fetchBtn.innerHTML;
+            fetchBtn.disabled = true;
+            fetchBtn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Đang tải...';
+            lucide.createIcons();
+
+            // Giả lập thời gian gọi dữ liệu
+            setTimeout(function () {
+                const totals = aggregate(fromStr, toStr);
+                renderTotals(totals);
+                fetchBtn.disabled = false;
+                fetchBtn.innerHTML = originalHTML;
+                lucide.createIcons();
+            }, 400);
+        });
+
+        exportBtn.addEventListener('click', function () {
+            if (!lastTotals) {
+                alert('Vui lòng bấm "Lấy dữ liệu" trước khi xuất file Excel.');
+                return;
+            }
+
+            const totalRevenue = lastTotals.sales + lastTotals.service + lastTotals.otherIncome;
+            const totalCost = lastTotals.material + lastTotals.labor + lastTotals.otherCost;
+            const profit = totalRevenue - totalCost;
+
+            const rows = [
+                ['BÁO CÁO DOANH THU - THE COFFEE HOUSE'],
+                ['Từ ngày', fromInput.value, 'Đến ngày', toInput.value],
+                [],
+                ['STT', 'Khoản mục', 'Giá trị (VND)'],
+                ['1.1', 'Tiền bán hàng', lastTotals.sales],
+                ['1.2', 'Tiền thu từ dịch vụ', lastTotals.service],
+                ['1.3', 'Tiền thu khác', lastTotals.otherIncome],
+                ['1', 'TỔNG DOANH THU', totalRevenue],
+                ['2.1', 'Chi phí nguyên vật liệu', lastTotals.material],
+                ['2.2', 'Chi phí nhân công', lastTotals.labor],
+                ['2.3', 'Chi phí khác (điện, nước, wifi, thuế GTGT, khuyến mãi...)', lastTotals.otherCost],
+                ['2', 'TỔNG CHI PHÍ', totalCost],
+                ['3', 'LỢI NHUẬN RÒNG', profit]
+            ];
+
+            const ws = XLSX.utils.aoa_to_sheet(rows);
+            ws['!cols'] = [{ wch: 8 }, { wch: 48 }, { wch: 20 }];
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Báo cáo doanh thu');
+
+            const fileName = 'Bao-cao-doanh-thu_' + fromInput.value + '_den_' + toInput.value + '.xlsx';
+            XLSX.writeFile(wb, fileName);
+        });
+
+        // ---- 7. Tải dữ liệu mặc định (Tháng này) khi mở trang ----
+        const defaultRange = getRangeForPeriod('thisMonth');
+        fromInput.value = defaultRange.from;
+        toInput.value = defaultRange.to;
+        periodSelect.value = 'thisMonth';
+        renderTotals(aggregate(defaultRange.from, defaultRange.to));
+    })();
     </script>
 </body>
 </html>

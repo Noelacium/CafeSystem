@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý thực đơn - The Coffee House</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght=500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
        body { font-family: 'Quicksand', sans-serif; }
@@ -73,9 +73,6 @@
             <div class="space-y-1">
                 <a href="management-menu.html" class="flex items-center px-3 py-2.5 bg-[#542e23] text-white font-semibold rounded-lg text-sm shadow-sm">
                     <i data-lucide="utensils-crossed" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý thực đơn</span>
-                </a>
-                <a href="management-inventory.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
-                    <i data-lucide="boxes" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý kho</span>
                 </a>
                 <a href="management-employee.html" class="flex items-center px-3 py-2.5 text-[#542e23] hover:bg-[#542e23]/5 font-medium rounded-lg text-sm transition-colors">
                     <i data-lucide="users-round" class="w-4 h-4 mr-3 flex-shrink-0"></i> <span class="sidebar-text">Quản lý nhân viên</span>
@@ -149,7 +146,7 @@
 
         <!-- BẢNG HIỂN THỊ THỰC ĐƠN -->
         <div class="flex-1 overflow-auto px-4 pb-4">
-            <div class="bg-white rounded-xl shadow-sm border border-[#542e23]/10 overfslow-hidden">
+            <div class="bg-white overflow-hidden rounded-xl shadow-sm border border-[#542e23]/10">
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-[#542e23] text-white text-xs font-bold uppercase tracking-wider">
@@ -263,78 +260,6 @@
                             </select>
                         </div>
                     </div>
-
-                    <!-- BẢNG ĐỊNH LƯỢNG NGUYÊN VẬT LIỆU CHỌN TRỰC TIẾP TỪ DROPDOWN VÀ BỎ MÃ NVL -->
-                    <div class="border border-gray-300 rounded-lg p-3 bg-white space-y-2 shadow-xs">
-                        <div class="text-xs font-bold uppercase tracking-wider text-[#542e23] border-b border-gray-200 pb-1">
-                            <span>Định lượng nguyên vật liệu thành phần</span>
-                        </div>
-                        <div class="overflow-x-auto max-h-48 overflow-y-auto">
-                            <table class="w-full border-collapse border border-gray-300 text-center">
-                                <thead>
-                                    <tr class="bg-[#dcc5b4]/50 text-[#542e23]">
-                                        <th class="border border-gray-300 p-2 w-1/2 text-left">Tên Nguyên Vật Liệu</th>
-                                        <th class="border border-gray-300 p-2 w-1/4">Số lượng</th>
-                                        <th class="border border-gray-300 p-2 w-1/4">Đơn vị tính</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-gray-50/50 font-medium">
-                                    <tr>
-                                        <td class="border border-gray-300 p-1.5 text-left">
-                                            <select id="ingredient-name-1" class="w-full bg-amber-50/60 border border-amber-200 rounded p-1 font-bold text-[#542e23] focus:outline-none focus:bg-white cursor-pointer">
-                                                <option value="Hạt cà phê Arabica">Hạt cà phê Arabica</option>
-                                                <option value="Hạt cà phê Robusta">Hạt cà phê Robusta</option>
-                                                <option value="Sữa tươi thanh trùng">Sữa tươi thanh trùng</option>
-                                                <option value="Đường nước tinh luyện">Đường nước tinh luyện</option>
-                                                <option value="Cốt trà đen đậm vị">Cốt trà đen đậm vị</option>
-                                                <option value="Cốt trà Oolong túi lọc">Cốt trà Oolong túi lọc</option>
-                                                <option value="Bột Matcha Nhật Bản">Bột Matcha Nhật Bản</option>
-                                                <option value="Kem tươi béo Whipping">Kem tươi béo Whipping</option>
-                                                <option value="Bột cacao nguyên chất">Bột cacao nguyên chất</option>
-                                                <option value="Bột mì cao cấp">Bột mì cao cấp</option>
-                                            </select>
-                                        </td>
-                                        <td class="border border-gray-300 p-1.5">
-                                            <input type="number" id="ingredient-qty-1" value="25" class="w-full bg-amber-50 border border-amber-300 rounded p-1 text-center font-bold text-orange-600 focus:outline-none focus:bg-white">
-                                        </td>
-                                        <td class="border border-gray-300 p-1.5">
-                                            <select id="ingredient-unit-1" class="w-full bg-transparent border-none text-center text-gray-500 focus:outline-none cursor-pointer">
-                                                <option value="gram">gram</option>
-                                                <option value="mL">mL</option>
-                                                <option value="Cái">Cái</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border border-gray-300 p-1.5 text-left">
-                                            <select id="ingredient-name-2" class="w-full bg-amber-50/60 border border-amber-200 rounded p-1 font-bold text-[#542e23] focus:outline-none focus:bg-white cursor-pointer">
-                                                <option value="Sữa tươi thanh trùng">Sữa tươi thanh trùng</option>
-                                                <option value="Hạt cà phê Arabica">Hạt cà phê Arabica</option>
-                                                <option value="Hạt cà phê Robusta">Hạt cà phê Robusta</option>
-                                                <option value="Đường nước tinh luyện">Đường nước tinh luyện</option>
-                                                <option value="Cốt trà đen đậm vị">Cốt trà đen đậm vị</option>
-                                                <option value="Cốt trà Oolong túi lọc">Cốt trà Oolong túi lọc</option>
-                                                <option value="Bột Matcha Nhật Bản">Bột Matcha Nhật Bản</option>
-                                                <option value="Kem tươi béo Whipping">Kem tươi béo Whipping</option>
-                                                <option value="Bột cacao nguyên chất">Bột cacao nguyên chất</option>
-                                                <option value="Bột mì cao cấp">Bột mì cao cấp</option>
-                                            </select>
-                                        </td>
-                                        <td class="border border-gray-300 p-1.5">
-                                            <input type="number" id="ingredient-qty-2" value="120" class="w-full bg-amber-50 border border-amber-300 rounded p-1 text-center font-bold text-orange-600 focus:outline-none focus:bg-white">
-                                        </td>
-                                        <td class="border border-gray-300 p-1.5">
-                                            <select id="ingredient-unit-2" class="w-full bg-transparent border-none text-center text-gray-500 focus:outline-none cursor-pointer">
-                                                <option value="mL">mL</option>
-                                                <option value="gram">gram</option>
-                                                <option value="Cái">Cái</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- CỘT CHỈNH SỬA LINK ẢNH TRỰC TIẾP -->
@@ -365,35 +290,35 @@
 
     <script>
         const productsData = [
-            { id: 1, name: 'Cappuccino', price: 65000, category: 'coffee', image: 'https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?q=80&w=500&auto=format&fit=crop' },
-            { id: 2, name: 'Espresso', price: 39000, category: 'coffee', image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=500&auto=format&fit=crop' },
-            { id: 3, name: 'Cà phê đen đá', price: 25000, category: 'coffee', image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500&auto=format&fit=crop' },
-            { id: 4, name: 'Cà Phê Sữa Đá', price: 35000, category: 'coffee', image: 'https://images.unsplash.com/photo-1629688825560-917b9727c15b?q=80&w=500&auto=format&fit=crop' },
-            { id: 5, name: 'Bạc Sỉu nóng/đá', price: 35000, category: 'coffee', image: 'https://plus.unsplash.com/premium_photo-1661562031871-317d77e64290?q=80&w=500&auto=format&fit=crop' },
-            { id: 6, name: 'Cafe Latte', price: 65000, category: 'coffee', image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=500&auto=format&fit=crop' },
-            { id: 7, name: 'Flat White', price: 45000, category: 'coffee', image: 'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?q=80&w=500&auto=format&fit=crop' },
-            { id: 8, name: 'Cold Brew Americano', price: 45000, category: 'coffee', image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=500&auto=format&fit=crop' },
-            { id: 9, name: 'Caramel Macchiato', price: 69000, category: 'coffee', image: 'https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/cach_lam_caramel_macchiato_thumb_b2c933a8cb.jpg' },
+            { id: 1, code: 'M01', name: 'Cappuccino', price: 65000, category: 'coffee', image: 'https://images.unsplash.com/photo-1611564494260-6f21b80af7ea?q=80&w=500&auto=format&fit=crop' },
+            { id: 2, code: 'M02', name: 'Espresso', price: 39000, category: 'coffee', image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=500&auto=format&fit=crop' },
+            { id: 3, code: 'M03', name: 'Cà phê đen đá', price: 25000, category: 'coffee', image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500&auto=format&fit=crop' },
+            { id: 4, code: 'M04', name: 'Cà Phê Sữa Đá', price: 35000, category: 'coffee', image: 'https://images.unsplash.com/photo-1629688825560-917b9727c15b?q=80&w=500&auto=format&fit=crop' },
+            { id: 5, code: 'M05', name: 'Bạc Sỉu nóng/đá', price: 35000, category: 'coffee', image: 'https://plus.unsplash.com/premium_photo-1661562031871-317d77e64290?q=80&w=500&auto=format&fit=crop' },
+            { id: 6, code: 'M06', name: 'Cafe Latte', price: 65000, category: 'coffee', image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=500&auto=format&fit=crop' },
+            { id: 7, code: 'M07', name: 'Flat White', price: 45000, category: 'coffee', image: 'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?q=80&w=500&auto=format&fit=crop' },
+            { id: 8, code: 'M08', name: 'Cold Brew Americano', price: 45000, category: 'coffee', image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=500&auto=format&fit=crop' },
+            { id: 9, code: 'M09', name: 'Caramel Macchiato', price: 69000, category: 'coffee', image: 'https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/cach_lam_caramel_macchiato_thumb_b2c933a8cb.jpg' },
             
-            { id: 10, name: 'Trà Đào Cam Sả', price: 49000, category: 'tea', image: 'https://plus.unsplash.com/premium_photo-1687977548737-afa5a6bcb85f?q=80&w=1171&auto=format&fit=crop' },
-            { id: 11, name: 'Trà Thạch Đào', price: 49000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdcnil3Zp2Bep3CQ8IR4DHKRN2qUteu4v6OdniPOdeRbACBUw0zWsftpBP&s=10' },
-            { id: 12, name: 'Trà Oolong Vải Thạch', price: 45000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzfW3g_Y7kusN8UYl9GVla7_kcj954MMbPZJWYEU21Qa4U413ZVEx5Yhk&s=10' },
-            { id: 13, name: 'Trà Long Nhãn Hạt Sen', price: 49000, category: 'tea', image: 'https://cdn2.fptshop.com.vn/unsafe/800x0/tra_long_nhan_1_3a9544eae3.jpeg' },
-            { id: 14, name: 'Trà Dâu Tây Đá Tuyết', price: 55000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROaTRbLQBhmk8fuyDwQ0J2SxH59olBQzsCIplQI18NG-bGDfNT7atsjkA&s=10' },
-            { id: 15, name: 'Trà Xoài Chanh Dây', price: 49000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4qe6w5EneblfcnNCtvSYcrp2Juy0tU1_nUcam76ULrg2N1AX4SIoMi5ph&s=10' },
-            { id: 16, name: 'Hi-Tea Vải Thảo Mộc', price: 55000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM3gaHsNoHCO2HwJt_8EbZOsL5arIltZ_ezAPfXx_BbHs2PPjf1zk25MsU&s=10' },
-            { id: 17, name: 'Hi-Tea Yuzu Trân Châu', price: 59000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaaKeSefHq1LrXosMU5PBBdNydJZULy5ejCSz85XXp_jYYWtbCsQQYiMFR&s=10' },
-            { id: 18, name: 'Trà Sữa Oolong Trân Châu', price: 45000, category: 'tea', image: 'https://dayphache.edu.vn/wp-content/uploads/2020/05/tra-sua-o-long.jpg' },
+            { id: 10, code: 'M10', name: 'Trà Đào Cam Sả', price: 49000, category: 'tea', image: 'https://plus.unsplash.com/premium_photo-1687977548737-afa5a6bcb85f?q=80&w=1171&auto=format&fit=crop' },
+            { id: 11, code: 'M11', name: 'Trà Thạch Đào', price: 49000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdcnil3Zp2Bep3CQ8IR4DHKRN2qUteu4v6OdniPOdeRbACBUw0zWsftpBP&s=10' },
+            { id: 12, code: 'M12', name: 'Trà Oolong Vải Thạch', price: 45000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzfW3g_Y7kusN8UYl9GVla7_kcj954MMbPZJWYEU21Qa4U413ZVEx5Yhk&s=10' },
+            { id: 13, code: 'M13', name: 'Trà Long Nhãn Hạt Sen', price: 49000, category: 'tea', image: 'https://cdn2.fptshop.com.vn/unsafe/800x0/tra_long_nhan_1_3a9544eae3.jpeg' },
+            { id: 14, code: 'M14', name: 'Trà Dâu Tây Đá Tuyết', price: 55000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROaTRbLQBhmk8fuyDwQ0J2SxH59olBQzsCIplQI18NG-bGDfNT7atsjkA&s=10' },
+            { id: 15, code: 'M15', name: 'Trà Xoài Chanh Dây', price: 49000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4qe6w5EneblfcnNCtvSYcrp2Juy0tU1_nUcam76ULrg2N1AX4SIoMi5ph&s=10' },
+            { id: 16, code: 'M16', name: 'Hi-Tea Vải Thảo Mộc', price: 55000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM3gaHsNoHCO2HwJt_8EbZOsL5arIltZ_ezAPfXx_BbHs2PPjf1zk25MsU&s=10' },
+            { id: 17, code: 'M17', name: 'Hi-Tea Yuzu Trân Châu', price: 59000, category: 'tea', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaaKeSefHq1LrXosMU5PBBdNydJZULy5ejCSz85XXp_jYYWtbCsQQYiMFR&s=10' },
+            { id: 18, code: 'M18', name: 'Trà Sữa Oolong Trân Châu', price: 45000, category: 'tea', image: 'https://dayphache.edu.vn/wp-content/uploads/2020/05/tra-sua-o-long.jpg' },
 
-            { id: 19, name: 'Bánh Tiramisu', price: 45000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuCw6OUVlOrmzhavD5zey1qnYh_re26leLDMwEXr8P4v9wDyCY6MWMvOY&s=10' },
-            { id: 20, name: 'Bánh Mousse Ca Cao', price: 35000, category: 'cake', image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=500&auto=format&fit=crop' },
-            { id: 21, name: 'Bánh Phô Mai Việt Quất', price: 49000, category: 'cake', image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=500&auto=format&fit=crop' },
-            { id: 22, name: 'Bánh Sừng Bò Croissant', price: 29000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTONiS9ONtpozR_1hNB-cMImUtMN25jgJBUep8d32DJDho3bOCucH3XtPY&s=10' },
-            { id: 23, name: 'Bánh Red Velvet', price: 45000, category: 'cake', image: 'https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?q=80&w=500&auto=format&fit=crop' },
-            { id: 24, name: 'Bánh Su Kem Choux', price: 30000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsedgSmW8WpXgBt7zRzsjm0VrvN33EnHEutKceyRXVL0IKzODZsv7DbFXE&s=10' },
-            { id: 25, name: 'Bánh bông lan trứng muối', price: 45000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHTX39ibomg7umRubAWXSVmicTI-2n9jbe_laDlamtTj-w49R-ScwewGSW &s=10' },
-            { id: 26, name: 'Bánh Matcha Green Tea', price: 39000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDi3AhhW48Ct9J3JeP0KBOvDRNWY5F1dNbA7tX2xxwqZeGFUtK93o7bHU&s=10' },
-            { id: 27, name: 'Bánh Macaron', price: 55000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUymzDcCQo0ZcOTMKLavZSa2DTx5eyIPmXvpatpKvuHylXn7NJFwX1UZry&s=10' }
+            { id: 19, code: 'M19', name: 'Bánh Tiramisu', price: 45000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuCw6OUVlOrmzhavD5zey1qnYh_re26leLDMwEXr8P4v9wDyCY6MWMvOY&s=10' },
+            { id: 20, code: 'M20', name: 'Bánh Mousse Ca Cao', price: 35000, category: 'cake', image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=500&auto=format&fit=crop' },
+            { id: 21, code: 'M21', name: 'Bánh Phô Mai Việt Quất', price: 49000, category: 'cake', image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=500&auto=format&fit=crop' },
+            { id: 22, code: 'M22', name: 'Bánh Sừng Bò Croissant', price: 29000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTONiS9ONtpozR_1hNB-cMImUtMN25jgJBUep8d32DJDho3bOCucH3XtPY&s=10' },
+            { id: 23, code: 'M23', name: 'Bánh Red Velvet', price: 45000, category: 'cake', image: 'https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?q=80&w=500&auto=format&fit=crop' },
+            { id: 24, code: 'M24', name: 'Bánh Su Kem Choux', price: 30000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsedgSmW8WpXgBt7zRzsjm0VrvN33EnHEutKceyRXVL0IKzODZsv7DbFXE&s=10' },
+            { id: 25, code: 'M25', name: 'Bánh bông lan trứng muối', price: 45000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHTX39ibomg7umRubAWXSVmicTI-2n9jbe_laDlamtTj-w49R-ScwewGSW &s=10' },
+            { id: 26, code: 'M26', name: 'Bánh Matcha Green Tea', price: 39000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDi3AhhW48Ct9J3JeP0KBOvDRNWY5F1dNbA7tX2xxwqZeGFUtK93o7bHU&s=10' },
+            { id: 27, code: 'M27', name: 'Bánh Macaron', price: 55000, category: 'cake', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUymzDcCQo0ZcOTMKLavZSa2DTx5eyIPmXvpatpKvuHylXn7NJFwX1UZry&s=10' }
         ];
 
         let currentEditId = null;
@@ -402,17 +327,14 @@
         let currentPage = 1;
         const rowsPerPage = 10;
 
-        // Thay thế hàm getMenuData cũ bằng hàm này:
         function getMenuData() {
             let data = localStorage.getItem('coffeeHouseMenu');
             if (!data) {
-                // Đổi thành productsData để lấy mảng mặc định ở dòng 366
                 localStorage.setItem('coffeeHouseMenu', JSON.stringify(productsData));
                 return productsData;
             }
             let parsed = JSON.parse(data);
             
-            // Đoạn này cũng sửa thành productsData.length luôn nhé
             if (parsed.length < productsData.length) {
                 localStorage.setItem('coffeeHouseMenu', JSON.stringify(productsData));
                 return productsData;
@@ -514,7 +436,7 @@
                 const rowHTML = `
                     <tr class="hover:bg-[#fff2da]/20 transition-colors">
                         <td class="p-4 text-center">
-                            <input type="radio" name="product-select" value="${item.id}" class="accent-[#e28766] w-4 h-4 cursor-pointer">
+                            <input type="checkbox" name="product-select" value="${item.id}" class="accent-[#e28766] w-4 h-4 cursor-pointer">
                         </td>
                         <td class="p-4">${typeBadge}</td>
                         <td class="p-4 text-center font-bold text-[#e28766]">${item.code}</td>
@@ -571,14 +493,6 @@
                 document.getElementById('modal-product-kitchen').value = "Quầy bar";
                 document.querySelector('input[name="product-type"][value="drink"]').checked = true;
                 
-                document.getElementById('ingredient-name-1').value = "Hạt cà phê Arabica";
-                document.getElementById('ingredient-qty-1').value = "25";
-                document.getElementById('ingredient-unit-1').value = "gram";
-                
-                document.getElementById('ingredient-name-2').value = "Sữa tươi thanh trùng";
-                document.getElementById('ingredient-qty-2').value = "120";
-                document.getElementById('ingredient-unit-2').value = "mL";
-                
                 document.getElementById('modal-product-image-url').value = "";
                 document.getElementById('image-preview').src = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500";
             } else {
@@ -601,14 +515,6 @@
                 document.getElementById('modal-product-kitchen').value = item.kitchen || "Quầy bar";
                 document.querySelector(`input[name="product-type"][value="${item.type || 'drink'}"]`).checked = true;
                 
-                document.getElementById('ingredient-name-1').value = item.ingName1 || "Hạt cà phê Arabica";
-                document.getElementById('ingredient-qty-1').value = item.ingQty1 !== undefined ? item.ingQty1 : 25;
-                document.getElementById('ingredient-unit-1').value = item.ingUnit1 || "gram";
-
-                document.getElementById('ingredient-name-2').value = item.ingName2 || "Sữa tươi thanh trùng";
-                document.getElementById('ingredient-qty-2').value = item.ingQty2 !== undefined ? item.ingQty2 : 120;
-                document.getElementById('ingredient-unit-2').value = item.ingUnit2 || "mL";
-
                 document.getElementById('modal-product-image-url').value = item.image || "";
                 document.getElementById('image-preview').src = item.image || "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500";
             }
@@ -642,14 +548,6 @@
                 image = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500";
             }
 
-            const ingName1 = document.getElementById('ingredient-name-1').value;
-            const ingQty1 = parseInt(document.getElementById('ingredient-qty-1').value) || 0;
-            const ingUnit1 = document.getElementById('ingredient-unit-1').value;
-
-            const ingName2 = document.getElementById('ingredient-name-2').value;
-            const ingQty2 = parseInt(document.getElementById('ingredient-qty-2').value) || 0;
-            const ingUnit2 = document.getElementById('ingredient-unit-2').value;
-
             if (!name) { alert("❌ Lỗi: Tên món không được bỏ trống!"); return; }
             if (!code) { alert("❌ Lỗi: Mã món không được bỏ trống!"); return; }
             if (!priceRaw) { alert("❌ Lỗi: Giá bán không được bỏ trống!"); return; }
@@ -667,7 +565,7 @@
                 if (duplicate) { alert("❌ Lỗi: Mã món này đã tồn tại!"); return; }
 
                 const newId = menu.length > 0 ? Math.max(...menu.map(m => m.id)) + 1 : 1;
-                menu.push({ id: newId, code, name, price, category, type, unit, kitchen, image, ingName1, ingQty1, ingUnit1, ingName2, ingQty2, ingUnit2 });
+                menu.push({ id: newId, code, name, price, category, type, unit, kitchen, image });
                 alert("🎉 Thêm món mới thành công!");
             } else {
                 const item = menu.find(m => m.id === currentEditId);
@@ -680,12 +578,6 @@
                     item.unit = unit;
                     item.kitchen = kitchen;
                     item.image = image;
-                    item.ingName1 = ingName1;
-                    item.ingQty1 = ingQty1;
-                    item.ingUnit1 = ingUnit1;
-                    item.ingName2 = ingName2;
-                    item.ingQty2 = ingQty2;
-                    item.ingUnit2 = ingUnit2;
                     alert("🎉 Đã lưu thay đổi thông tin món thành công!");
                 }
             }
